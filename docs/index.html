@@ -12,11 +12,15 @@
   --up:#1F5C3D; --down:#A8321E; --amber:#8A5514;
   --grid:#E4EAE5;
   --c0:#2E7D4F; --c1:#C97A16; --c2:#3563A8; --c3:#A8327C;
+  color-scheme:light;
+  --scroll-thumb:#C2CCC4; --scroll-thumb-hover:#A6B3A9; --scroll-track:transparent;
   --serif:"Noto Serif TC",serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
   --mono:"IBM Plex Mono","SF Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --scroll-thumb:#39443B; --scroll-thumb-hover:#4C5A4F; --scroll-track:transparent;
   --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
   --rule:#2F3830; --rule-soft:#242B26;
   --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
@@ -25,6 +29,8 @@
   --c0:#3D9C71; --c1:#B87F1E; --c2:#5F82D0; --c3:#C25E99;
 }}
 :root[data-theme="dark"]{
+  color-scheme:dark;
+  --scroll-thumb:#39443B; --scroll-thumb-hover:#4C5A4F; --scroll-track:transparent;
   --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
   --rule:#2F3830; --rule-soft:#242B26;
   --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
@@ -33,6 +39,16 @@
   --c0:#3D9C71; --c1:#B87F1E; --c2:#5F82D0; --c3:#C25E99;
 }
 *{box-sizing:border-box}
+/* 捲軸統一：預設的原生捲軸在深色介面上會是一條突兀的白色 */
+*{scrollbar-width:thin;scrollbar-color:var(--scroll-thumb) var(--scroll-track)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--scroll-track)}
+::-webkit-scrollbar-thumb{background:var(--scroll-thumb);border-radius:99px;
+  border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--scroll-thumb-hover);
+  border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-corner{background:var(--scroll-track)}
+::selection{background:var(--accent-wash);color:var(--ink)}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;
   line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1220px;margin:0 auto;padding:0 24px}
@@ -254,7 +270,10 @@ select{max-width:100%}
 /* 長表格：.scroller 因 overflow-x:auto 本身即為捲動容器，
    sticky 的 top 是相對於它、而非視窗——先前設 top:var(--topH) 會把表頭
    往下推 127px，排到前三列資料底下。改為容器自行垂直捲動、表頭貼在 top:0。 */
-.scroller.tall{max-height:min(68vh,640px);overflow:auto;overscroll-behavior:contain}
+.scroller.tall{max-height:min(68vh,640px);overflow:auto;overscroll-behavior:contain;
+  scrollbar-color:var(--scroll-thumb) var(--surface)}
+.scroller.tall::-webkit-scrollbar-track{background:var(--surface)}
+.scroller.tall::-webkit-scrollbar-corner{background:var(--surface)}
 .scroller.tall thead th{position:sticky;top:0;z-index:2;
   box-shadow:inset 0 -1px 0 var(--rule)}
 /* 大表格保留橫向捲動，但小表格不要被 min-width 綁死 */
