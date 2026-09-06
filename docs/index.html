@@ -101,7 +101,7 @@ svg.chart{display:block;width:100%;height:auto;overflow:visible}
 
 /* ---- tables ---- */
 .scroller{overflow-x:auto;border:1px solid var(--rule);border-radius:5px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;font-size:13px;min-width:760px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px;min-width:760px}
 th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
 thead th{background:var(--panel);font-family:var(--mono);font-weight:500;
   font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
@@ -251,8 +251,12 @@ label.fld{min-width:0}
 label.fld select,label.fld input{width:100%;max-width:100%}
 select{max-width:100%}
 /* 表頭吸附高度改由 JS 量測，避免頁首換行後被遮住 */
-/* 僅長表格需要吸附表頭；短表格吸附會遮住其後的區塊標題 */
-#tbl thead th,#yTbl thead th{position:sticky;top:var(--topH,53px);z-index:2}
+/* 長表格：.scroller 因 overflow-x:auto 本身即為捲動容器，
+   sticky 的 top 是相對於它、而非視窗——先前設 top:var(--topH) 會把表頭
+   往下推 127px，排到前三列資料底下。改為容器自行垂直捲動、表頭貼在 top:0。 */
+.scroller.tall{max-height:min(68vh,640px);overflow:auto;overscroll-behavior:contain}
+.scroller.tall thead th{position:sticky;top:0;z-index:2;
+  box-shadow:inset 0 -1px 0 var(--rule)}
 /* 大表格保留橫向捲動，但小表格不要被 min-width 綁死 */
 table.narrow{min-width:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -339,7 +343,7 @@ table.narrow{min-width:0}
       <select id="fConf"><option value="">全部信心等級</option><option>A</option><option>B</option><option>C</option></select>
       <span class="mute" style="font-size:12.5px" id="cnt"></span>
     </div>
-    <div class="scroller"><table id="tbl">
+    <div class="scroller tall"><table id="tbl">
       <thead><tr>
         <th class="sortable" data-k="course">球場 · 類別</th>
         <th class="opt2">近 10 年走勢</th>
@@ -442,7 +446,7 @@ table.narrow{min-width:0}
       <label class="fld">區域<select id="yReg"><option value="">全部</option></select></label>
       <span class="mute" style="font-size:12.5px;align-self:flex-end;padding-bottom:7px" id="yCnt"></span>
     </div>
-    <div class="scroller"><table id="yTbl"><thead><tr>
+    <div class="scroller tall"><table id="yTbl"><thead><tr>
       <th class="sortable" data-yk="course">球場 · 類別</th>
       <th class="opt">區域</th>
       <th class="n sortable" data-yk="jan">年初<br>萬元</th>
