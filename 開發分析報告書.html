@@ -1,0 +1,756 @@
+<title>球證行情所 開發分析報告書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --paper:#F7F8F6; --surface:#FFFFFF; --panel:#EDF0EC; --panel-2:#E3E8E4;
+  --rule:#D5DCD6; --rule-soft:#E4EAE5;
+  --ink:#16201A; --ink-2:#46524A; --ink-3:#727E76;
+  --accent:#2E7D4F; --accent-deep:#1F5C3D; --accent-wash:#E6F0EA;
+  --flag:#A8321E; --amber:#8A5514;
+  --serif:"Noto Serif TC",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono","SF Mono",ui-monospace,monospace;
+  --shell:1180px; --col:760px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
+    --rule:#2F3830; --rule-soft:#242B26;
+    --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
+    --accent:#4FA97A; --accent-deep:#68BE8F; --accent-wash:#1B2A21;
+    --flag:#E0736B; --amber:#D2971F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
+  --rule:#2F3830; --rule-soft:#242B26;
+  --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
+  --accent:#4FA97A; --accent-deep:#68BE8F; --accent-wash:#1B2A21;
+  --flag:#E0736B; --amber:#D2971F;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--shell);margin:0 auto;padding:0 28px}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--rule);background:var(--surface)}
+.mast .wrap{padding-top:52px;padding-bottom:40px}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5.2vw,54px);
+  line-height:1.18;letter-spacing:-.01em;margin:0;text-wrap:balance;max-width:16ch}
+.sub{font-size:17px;color:var(--ink-2);max-width:56ch;margin:20px 0 0;line-height:1.8}
+.meta{display:flex;flex-wrap:wrap;gap:0;margin:36px 0 0;border-top:1px solid var(--rule)}
+.meta div{flex:1 1 150px;padding:14px 18px 0 0;border-right:1px solid var(--rule-soft)}
+.meta div:last-child{border-right:0}
+.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.meta dd{margin:0;font-size:14.5px;font-weight:500;font-variant-numeric:tabular-nums}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;background:var(--paper);
+  border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;gap:0;overflow-x:auto;padding-top:0;padding-bottom:0}
+nav a{flex:0 0 auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  color:var(--ink-3);text-decoration:none;padding:13px 15px;border-bottom:2px solid transparent}
+nav a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+nav a:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* ---------- layout ---------- */
+main{padding:0 0 100px}
+section{padding:64px 0 0;scroll-margin-top:52px}
+.head{display:grid;grid-template-columns:56px 1fr;gap:0 20px;align-items:start;
+  margin:0 0 30px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+.num{font-family:var(--mono);font-size:12px;color:var(--accent);
+  padding-top:11px;letter-spacing:.05em}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3vw,32px);
+  line-height:1.3;margin:0;text-wrap:balance}
+.head p{grid-column:2;margin:8px 0 0;color:var(--ink-3);font-size:14.5px;line-height:1.7}
+.body{max-width:var(--col);margin-left:76px}
+@media (max-width:820px){ .body{margin-left:0} .head{grid-template-columns:44px 1fr;gap:0 12px} }
+h3{font-family:var(--sans);font-weight:700;font-size:17px;margin:38px 0 12px;
+  letter-spacing:.01em}
+h4{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);margin:28px 0 10px}
+p{margin:0 0 16px}
+.body ul,.body ol{margin:0 0 18px;padding-left:22px}
+.body li{margin:0 0 8px}
+strong{font-weight:700}
+em{font-style:normal;background:var(--accent-wash);padding:1px 4px;border-radius:2px}
+code{font-family:var(--mono);font-size:13px;background:var(--panel);
+  padding:1.5px 5px;border-radius:3px}
+a.ext{color:var(--accent-deep);text-decoration:underline;text-underline-offset:2px;
+  text-decoration-thickness:1px}
+
+/* ---------- callouts ---------- */
+.lead{font-size:18.5px;line-height:1.8;color:var(--ink);font-weight:500;
+  border-left:3px solid var(--accent);padding-left:20px;margin:0 0 26px}
+.note{background:var(--panel);border-radius:4px;padding:18px 22px;margin:24px 0;
+  font-size:14.5px;line-height:1.75;color:var(--ink-2)}
+.note b{color:var(--ink)}
+.flagbox{border:1px solid var(--flag);border-radius:4px;padding:18px 22px;margin:24px 0;
+  font-size:14.5px;line-height:1.75}
+.flagbox .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--flag);display:block;margin-bottom:7px}
+
+/* ---------- key figures ---------- */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  gap:1px;background:var(--rule);border:1px solid var(--rule);margin:26px 0;border-radius:4px;overflow:hidden}
+.fig{background:var(--surface);padding:18px 20px 20px}
+.fig .v{font-family:var(--mono);font-weight:500;font-size:27px;color:var(--accent-deep);
+  line-height:1.15;font-variant-numeric:tabular-nums;display:block}
+.fig .k{font-size:12.5px;color:var(--ink-3);margin-top:7px;line-height:1.55}
+
+/* ---------- tables ---------- */
+.scroller{overflow-x:auto;margin:22px 0;border:1px solid var(--rule);border-radius:4px;
+  background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+caption{caption-side:top;text-align:left;font-family:var(--mono);font-size:11px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);
+  padding:14px 16px 10px}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--rule-soft);
+  vertical-align:top;line-height:1.6}
+thead th{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);background:var(--panel);
+  border-bottom:1px solid var(--rule);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+td.name{font-weight:500;white-space:nowrap}
+.dim{color:var(--ink-3)}
+.hit{color:var(--flag);font-weight:500}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid currentColor;border-radius:99px;padding:1px 7px;white-space:nowrap;
+  display:inline-block;line-height:1.6}
+.chip.warn{color:var(--flag)}
+.chip.ok{color:var(--accent-deep)}
+.chip.mid{color:var(--amber)}
+
+/* ---------- charts ---------- */
+figure{margin:30px 0;border:1px solid var(--rule);border-radius:4px;
+  background:var(--surface);padding:20px 22px 16px}
+figure .ttl{font-weight:700;font-size:15px;margin:0 0 3px}
+figure .cap{font-size:12.5px;color:var(--ink-3);margin:0 0 20px;line-height:1.6}
+.chart{display:grid;grid-template-columns:auto 1fr auto;gap:5px 12px;align-items:center;
+  position:relative}
+.chart .lbl{font-size:12.5px;text-align:right;white-space:nowrap;color:var(--ink-2)}
+.track{position:relative;height:15px;background:var(--panel);border-radius:2px}
+.bar{position:absolute;left:0;top:0;bottom:0;background:var(--accent);
+  border-radius:2px 4px 4px 2px}
+.chart .val{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;
+  color:var(--ink-2);white-space:nowrap;min-width:52px}
+.axis{grid-column:2;display:flex;justify-content:space-between;margin-top:8px;
+  border-top:1px solid var(--rule);padding-top:5px}
+.axis span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.thr{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed var(--flag)}
+.thrnote{font-family:var(--mono);font-size:10.5px;color:var(--flag);
+  grid-column:2;margin-top:2px}
+
+/* ---------- phases ---------- */
+.phase{border-left:2px solid var(--rule);padding:0 0 4px 22px;margin:0 0 30px;position:relative}
+.phase::before{content:"";position:absolute;left:-5px;top:7px;width:8px;height:8px;
+  border-radius:50%;background:var(--accent)}
+.phase .pk{font-family:var(--mono);font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.phase h3{margin:0 0 4px;font-size:16.5px}
+.phase .when{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 10px}
+.phase ul{margin:0;padding-left:20px;font-size:14.5px}
+
+/* ---------- formula ---------- */
+.formula{background:var(--panel);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;
+  padding:14px 18px;margin:14px 0 20px;font-family:var(--mono);font-size:13px;
+  line-height:1.9;overflow-x:auto;white-space:pre}
+
+footer{border-top:1px solid var(--rule);margin-top:60px;background:var(--surface)}
+footer .wrap{padding:34px 28px 60px;font-size:13px;color:var(--ink-3);line-height:1.8}
+footer a{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">開發分析報告書 · Ver 1.0 · 已實作</p>
+    <h1>球證行情所</h1>
+    <p class="sub">台灣高爾夫球證的價格研究平台。以投資分析為主軸、打球價差為輔助，把散落在各家仲介的牌價，整理成可回測、可比價、可算報酬的資料。</p>
+    <dl class="meta">
+      <div><dt>文件版本</dt><dd>v1.0 實作後修訂</dd></div>
+      <div><dt>製表日期</dt><dd>2026-09-06</dd></div>
+      <div><dt>資料基準</dt><dd>1987-01 至 2026-07</dd></div>
+      <div><dt>比對來源</dt><dd>4 家仲介 · 68 筆</dd></div>
+      <div><dt>文件狀態</dt><dd>已完成建置</dd></div>
+    </dl>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#s0">實作結果</a>
+    <a href="#s1">01 緣起</a>
+    <a href="#s2">02 目的</a>
+    <a href="#s3">03 資料查證</a>
+    <a href="#s4">04 品質規則</a>
+    <a href="#s5">05 產品定位</a>
+    <a href="#s6">06 功能規劃</a>
+    <a href="#s7">07 指標定義</a>
+    <a href="#s8">08 架構</a>
+    <a href="#s9">09 里程碑</a>
+    <a href="#s10">10 風險</a>
+    <a href="#s11">11 來源</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+
+<section id="s0" style="padding-top:44px">
+  <div class="body" style="margin-left:0;max-width:none">
+    <div style="border:1px solid var(--accent);border-radius:5px;padding:22px 24px;background:var(--accent-wash)">
+      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+         color:var(--accent-deep);margin:0 0 10px">實作結果 · 2026-09-06</p>
+      <p style="font-size:17px;line-height:1.75;margin:0 0 14px;font-weight:500">
+        本報告書 v0.9 為規劃文件。網站已完成建置，
+        <a class="ext" href="https://claude.ai/code/artifact/154e1dd9-c7f6-433f-8387-364fb0466a9d">球證行情所</a>
+        現已上線，本版依實作結果修訂——包含一處必須更正的自相矛盾（見 7.5）。</p>
+      <div class="figs" style="margin:0">
+        <div class="fig"><span class="v">25,376</span><p class="k">月度報價筆數<br>1987-01 至 2026-07</p></div>
+        <div class="fig"><span class="v">−67.9%</span><p class="k">TGMI 自 1990 年高點<br>的最大回撤</p></div>
+        <div class="fig"><span class="v">35.8 年</span><p class="k">收復 1990 年高點<br>所需時間</p></div>
+        <div class="fig"><span class="v">+6.14%</span><p class="k">40 年全期年化</p></div>
+      </div>
+      <p style="font-size:14px;color:var(--ink-2);line-height:1.75;margin:16px 0 0">
+        <b>規劃階段最大的誤判。</b>v0.9 把日本 1990 年的崩跌當成台灣的「前車之鑑」，
+        認為台灣的供給凍結故事讓它與日本不同。建完指數才發現，
+        <b>台灣自己就有一輪完整的泡沫與崩盤</b>：1987–1990 年三年多上漲逾五倍，
+        1990 年 4 月見頂後連跌 13 年，2003 年 4 月觸底時已回檔 67.9%，
+        直到 2026 年 1 月才重新站上 1990 年的價位。這個市場不需要借日本當警示案例。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <div class="head"><span class="num">01</span><h2>緣起</h2>
+    <p>為什麼這個網站值得做，以及它針對的是誰的什麼問題。</p></div>
+  <div class="body">
+
+  <p class="lead">台灣高爾夫球證是一個有 40 年月度公開報價、單一標的價差達 280 倍、2025 年最大漲幅 31%，卻連一條指數都沒有的資產類別。</p>
+
+  <p>球證的市場資訊，目前完全依賴仲介商各自公布的「參考行情表」。這些表格每月更新、可公開查閱，其中一家回溯到民國 76 年（1987）——就資料的存在而言，這個市場其實比多數人以為的透明得多。</p>
+
+  <p>問題出在資料的<strong>形狀</strong>。行情表是為了「打電話來詢價」而設計的，不是為了分析而設計的：它沒有歷史序列、沒有把保證金從牌價裡拆出來、沒有把過戶費算進取得成本、類別命名各家不同、更沒有任何一家把「買這張證能省多少打球錢」放進同一張表。想判斷一張球證划不划算的人，得同時打開五個網站、手動換算、再自己憑印象比對去年的價位。</p>
+
+  <p>於是這個市場出現一個矛盾：<strong>資料是公開的，但幾乎沒有人在做分析。</strong>2025 年東方球場個人證從 1,200 萬漲到 1,500 萬、2026 年 8 月已站上 1,695 萬，不到兩年 +41%——這個數字沒有出現在任何一份可查的績效報表裡，只散落在幾則新聞和幾張每月覆蓋掉舊值的網頁上。</p>
+
+  <div class="figs">
+    <div class="fig"><span class="v">280×</span><p class="k">最貴與最便宜球證的價差<br>（東方 1,695 萬 ↔ 嘉光 6 萬）</p></div>
+    <div class="fig"><span class="v">+41%</span><p class="k">東方個人證 2025 年初<br>至 2026 年 8 月漲幅</p></div>
+    <div class="fig"><span class="v">40 年</span><p class="k">可回溯的月度行情<br>（民國 76–115 年度）</p></div>
+    <div class="fig"><span class="v">0</span><p class="k">現存的球證價格指數<br>或歷史績效工具</p></div>
+  </div>
+
+  <h3>三種人現在都得不到答案</h3>
+  <ul>
+    <li><strong>想投資的人</strong>問「這張證過去五年年化多少、波動多大、最大回撤多深」——沒有任何工具回答得出來。</li>
+    <li><strong>想打球的人</strong>問「我一年打 30 場，買證划算還是當來賓划算」——需要同時知道球證價、過戶費、年費、會員與來賓的價差，四項資料分散在三個地方。</li>
+    <li><strong>已經持證的人</strong>問「現在該賣嗎」——只能看到本月牌價，看不到自己這張證在同區裡是領漲還是落後。</li>
+  </ul>
+
+  <div class="note"><b>一個具體的落差。</b>翡翠球場個人證目前報價 6.5 萬元，但過戶費是 10 萬元——買方實際要付出 16.5 萬，其中 <b>60% 不是給賣方，而是給球場</b>。任何一家行情表都同時列出了這兩個數字，但沒有一家把它們加起來。</div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <div class="head"><span class="num">02</span><h2>目的與範圍</h2>
+    <p>這個網站要做什麼、刻意不做什麼，以及成功長什麼樣子。</p></div>
+  <div class="body">
+
+  <h4>核心目的</h4>
+  <p>把台灣球證從「一個要靠人脈打聽的市場」，變成「一個可以看數字做判斷的資產類別」。具體是三件事：</p>
+  <ol>
+    <li><strong>建立台灣第一條球證價格指數</strong>，讓「這個市場今年漲了多少」有標準答案。</li>
+    <li><strong>把牌價換算成真實成本與真實報酬</strong>：扣掉保證金、加上過戶費、計入年費，再算持有期間的年化報酬。</li>
+    <li><strong>把打球價差量化成投資的一部分</strong>：一張證每年替持有人省下的擊球費，是這個資產的「配息」，應該併入報酬率計算。</li>
+  </ol>
+
+  <h4>範圍界線</h4>
+  <div class="scroller">
+  <table>
+    <caption>做與不做</caption>
+    <thead><tr><th>做</th><th>不做</th></tr></thead>
+    <tbody>
+      <tr><td>彙整多家公開參考行情並標示分歧</td><td>撮合買賣、居間仲介、收取佣金</td></tr>
+      <tr><td>歷史序列、指數、報酬與波動統計</td><td>提供個股式的「買進／賣出」建議</td></tr>
+      <tr><td>總持有成本與損益兩平試算</td><td>宣稱能預測未來價格</td></tr>
+      <tr><td>會員／來賓擊球費與訂位條件對照</td><td>線上訂位、開球時段交易</td></tr>
+      <tr><td>球證制度、稅務、過戶流程的知識庫</td><td>個案稅務或法律意見</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="flagbox"><span class="tag">定位聲明</span>
+  本站是<strong>資訊整理與分析工具</strong>，不是投資顧問事業，不從事證券投資顧問法規範之業務。所有數字均為公開參考行情之彙整，非成交價，亦不構成要約或投資建議。這句話會出現在每一個報價頁面的頁尾，不是只放在服務條款裡。</div>
+
+  <h4>成功指標（上線後 12 個月）</h4>
+  <ul>
+    <li>指數連續發布 12 期，且每期都能提供成分與計算過程。</li>
+    <li>覆蓋 50 座以上球場 × 各類別，每筆至少 3 個獨立來源。</li>
+    <li>使用者能在 3 次點擊內，得到「買這張證的損益兩平打球場次」。</li>
+    <li>回溯資料至少接回民國 100 年（15 年序列）。</li>
+  </ul>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <div class="head"><span class="num">03</span><h2>資料查證：四源交叉比對實測</h2>
+    <p>在寫任何一行程式之前，先驗證「多方比對」這個前提是否成立。以下是實際做過的比對，不是規劃。</p></div>
+  <div class="body">
+
+  <p class="lead">結論：四家仲介的報價在多數項目上高度一致（極差中位數 3.0%），但有 21% 的項目分歧超過 5%，其中一筆分歧達 44.9%。單一來源不可用，多源共識可用。</p>
+
+  <h3>3.1 來源盤點</h3>
+  <div class="scroller">
+  <table>
+    <caption>已驗證的公開行情來源</caption>
+    <thead><tr><th>來源</th><th>本次基準日</th><th class="n">可比對筆數</th><th>報價形式</th><th>歷史資料</th></tr></thead>
+    <tbody>
+      <tr><td class="name">惠豐高爾夫</td><td>115/08/17</td><td class="n">52</td><td>區間為主（94%）</td><td>各年度分頁</td></tr>
+      <tr><td class="name">公道國際</td><td>2026/08/19</td><td class="n">53</td><td>單點為主（96%）</td><td>無</td></tr>
+      <tr><td class="name">悅來高爾夫</td><td>115/08/26</td><td class="n">53</td><td>混合（區間 45%）</td><td>民國 76–115，40 個年度（月度）</td></tr>
+      <tr><td class="name">golf168</td><td><span class="hit">未標示</span></td><td class="n">29</td><td>單點為主</td><td>無</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note"><b>第一個發現與程式無關。</b>四家裡有一家<b>完全沒有標示更新日期</b>，另一家用西元、兩家用民國。任何自動化管線的第一道工作不是抓價格，是先確定這張表是哪一天的——沒有日期的來源只能當交叉驗證的參考，不能進主序列。</div>
+
+  <h3>3.2 一致性統計</h3>
+  <p>取 53 組「球場 × 會員類別」，將區間報價取中點，計算四源之間的極差率（最高與最低的差 ÷ 平均）：</p>
+
+  <div class="figs">
+    <div class="fig"><span class="v">3.0%</span><p class="k">極差率中位數<br>多數項目分歧極小</p></div>
+    <div class="fig"><span class="v">34%</span><p class="k">極差率 ≤ 2% 的項目比例</p></div>
+    <div class="fig"><span class="v">11 / 53</span><p class="k">極差率 &gt; 5%<br>必須人工複核</p></div>
+    <div class="fig"><span class="v">±0.7%</span><p class="k">各來源的系統性偏誤上限<br>沒有一家長期偏高或偏低</p></div>
+  </div>
+
+  <figure>
+    <p class="ttl">分歧最大的 12 組報價</p>
+    <p class="cap">四家仲介報價的極差率。灰色軌道為 0–46% 的完整量尺；虛線為 5% 的人工複核門檻。單位：相對百分比。</p>
+    <div class="chart">
+      <span class="lbl">台北 · 團體</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:97.6%"></div></div><span class="val">44.9%</span>
+      <span class="lbl">幸福 · 眷屬</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:41.7%"></div></div><span class="val">19.2%</span>
+      <span class="lbl">翡翠 · 個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:33.5%"></div></div><span class="val">15.4%</span>
+      <span class="lbl">八里國際 · 個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:31.1%"></div></div><span class="val">14.3%</span>
+      <span class="lbl">龍潭 · 個人平日</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:23.3%"></div></div><span class="val">10.7%</span>
+      <span class="lbl">龍潭 · 個人正式</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:21.3%"></div></div><span class="val">9.8%</span>
+      <span class="lbl">大屯 · 股東眷屬</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:21.1%"></div></div><span class="val">9.7%</span>
+      <span class="lbl">立益關西 · 個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:21.1%"></div></div><span class="val">9.7%</span>
+      <span class="lbl">嘉光 · 股東個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:17.4%"></div></div><span class="val">8.0%</span>
+      <span class="lbl">統帥 · 眷屬</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:15.4%"></div></div><span class="val">7.1%</span>
+      <span class="lbl">山溪地 · 個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:13.3%"></div></div><span class="val">6.1%</span>
+      <span class="lbl">楊梅 · 股東個人</span><div class="track"><div class="thr" style="left:10.9%"></div><div class="bar" style="width:10.7%"></div></div><span class="val">4.9%</span>
+      <div class="axis"><span>0%</span><span>10%</span><span>20%</span><span>30%</span><span>40%</span><span>46%</span></div>
+      <p class="thrnote">虛線 = 5% 人工複核門檻</p>
+    </div>
+  </figure>
+
+  <h3>3.3 四個必須解釋的離群案例</h3>
+  <div class="scroller">
+  <table>
+    <caption>分歧來源的人工判讀</caption>
+    <thead><tr><th>項目</th><th class="n">四家報價（萬元）</th><th>判讀</th></tr></thead>
+    <tbody>
+      <tr><td class="name">台北 · 團體</td><td class="n">1310 / <span class="hit">830</span> / 1265 / 1310</td><td><strong>過期未更新。</strong>三家一致落在 1,250–1,320，一家停留在 830。這不是市場分歧，是資料陳舊——也是為什麼共識價必須取中位數而非平均。</td></tr>
+      <tr><td class="name">大屯 · 股東眷屬</td><td class="n">447.5 / 450 / 440 / <span class="hit">485</span></td><td><strong>保證金處理不同。</strong>三家標註「(30保)」，一家未標。牌價含 30 萬保證金與否，直接造成 9.7% 的假分歧。</td></tr>
+      <tr><td class="name">幸福 · 眷屬</td><td class="n">255 / 260 / <span class="hit">285</span> / <span class="hit">235</span></td><td><strong>真實的流動性不足。</strong>四家兩兩分居高低端，沒有共識，代表這檔近期成交稀少、報價各憑經驗。應標示為低信心。</td></tr>
+      <tr><td class="name">林口</td><td class="n">1640–1670（股東個人）<br>1670–1700（股東＋眷屬）</td><td><strong>類別對不上。</strong>兩家報「股東個人」、兩家報「股東＋眷屬」，若以球場名稱直接 JOIN，會把兩種不同權利的證混成同一檔。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>3.4 歷史序列：實作後才確認的規模</h3>
+  <p>規劃階段只從摘要得知「35 個年度」。實際打開年度下拉選單後，情況比預期好得多：</p>
+  <div class="figs">
+    <div class="fig"><span class="v">41</span><p class="k">年度頁面<br>民國 76–115</p></div>
+    <div class="fig"><span class="v">25,376</span><p class="k">月度報價筆數</p></div>
+    <div class="fig"><span class="v">475</span><p class="k">連續月份<br>1987-01 – 2026-07</p></div>
+    <div class="fig"><span class="v">110</span><p class="k">具序列的標的<br>含 15 座已停業球場</p></div>
+  </div>
+  <p>每個年度頁是「球場／類別／一月…十二月」的完整月度表格，結構一致、機器可讀，
+  URL 為單純的 <code>?id=N</code>。這代表這個專案取得了一份<strong>其他人沒有整理過的 40 年月度資產價格序列</strong>。</p>
+  <div class="note"><b>但涵蓋範圍會隨年份成長</b>：1987 年約 11 筆、1990 年 34 筆、
+  2003 年 47 筆、2016 年 74 筆。直接跨期比較會把「成分變多」誤讀成「價格上漲」，
+  因此指數必須採鏈式連接（見 7.5）。</div>
+  <p>另一個規劃時沒預料到的收穫是<strong>已停業球場</strong>。資料中有 15 座球場的序列在某個時點終止——
+  興農（中科二期徵收，至 2025-04）、藍鷹（至 2017-12）、台鳳（至 2006-12）、
+  國華（至 1993-06）等。國華尤其關鍵：它是 1987 年那輪泡沫的震央，
+  一年內從 50 萬漲到 250 萬，1993 年就從市場上消失。
+  這類標的不會出現在任何現行行情表上，卻正是「球證會不會歸零」這個問題的答案。</p>
+
+  <h3>3.5 一個沒人算的數字：過戶費率</h3>
+  <p>四家都列出過戶費，但都放在最右邊的欄位、與價格分開看。把它除以共識價之後，出現本次調查最強的產品訊號：</p>
+
+  <figure>
+    <p class="ttl">過戶費佔球證價格的比率</p>
+    <p class="cap">取樣 45 組報價，過戶費率中位數 8.2%。虛線為中位數。翡翠的過戶費超過球證本身價格，量尺於 45% 截斷後另行標註。</p>
+    <div class="chart">
+      <span class="lbl">豐原 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:0.6%"></div></div><span class="val">0.3%</span>
+      <span class="lbl">台中國際 · 股東</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:0.8%"></div></div><span class="val">0.4%</span>
+      <span class="lbl">彰化 · 股東</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:1.3%"></div></div><span class="val">0.6%</span>
+      <span class="lbl">大屯 · 股東</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:3.6%"></div></div><span class="val">1.6%</span>
+      <span class="lbl">台灣老淡水 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:10.4%"></div></div><span class="val">4.7%</span>
+      <span class="lbl">礁溪 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:18.2%"></div></div><span class="val">8.2%</span>
+      <span class="lbl">第一 · 股東個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:24.7%"></div></div><span class="val">11.1%</span>
+      <span class="lbl">美麗華 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:26.0%"></div></div><span class="val">11.7%</span>
+      <span class="lbl">東方 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:26.2%"></div></div><span class="val">11.8%</span>
+      <span class="lbl">統帥 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:52.7%"></div></div><span class="val">23.7%</span>
+      <span class="lbl">台豐 · 股東個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:59.3%"></div></div><span class="val">26.7%</span>
+      <span class="lbl">揚昇 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:91.6%"></div></div><span class="val">41.2%</span>
+      <span class="lbl">翡翠 · 個人</span><div class="track"><div class="thr" style="left:18.2%"></div><div class="bar" style="width:100%;background:repeating-linear-gradient(135deg,var(--accent),var(--accent) 5px,var(--surface) 5px,var(--surface) 7px)"></div></div><span class="val">154%</span>
+      <div class="axis"><span>0%</span><span>10%</span><span>20%</span><span>30%</span><span>40%</span><span>45%+</span></div>
+      <p class="thrnote">虛線 = 8.2% 中位數　斜線 = 超出量尺</p>
+    </div>
+  </figure>
+
+  <p>過戶費率從 0.3%（豐原）到 154%（翡翠），差距 <strong>559 倍</strong>。這代表兩張牌價同為 400 萬的球證，實際取得成本可能是 401 萬與 565 萬——而目前沒有任何一個地方把這個數字算給使用者看。<em>這是本站最容易建立、也最難被複製的第一個價值點。</em></p>
+
+  <div class="note"><b>還有一個沒人追蹤的變化。</b>四家中僅 golf168 註記「美麗華 115 年 10 月起過戶費調整為 170 萬（眷屬 285 萬）」——由 140 萬調升至 170 萬，取得成本一次增加 30 萬，過戶費率從 11.7% 升到 14.2%。這種<b>費率調整公告</b>沒有任何地方彙整，本站應建立獨立的「制度異動時間軸」來收錄。</div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <div class="head"><span class="num">04</span><h2>資料品質規則</h2>
+    <p>從第 3 章的實測歸納出的九條規則，是資料管線的驗收標準。</p></div>
+  <div class="body">
+
+  <div class="scroller">
+  <table>
+    <caption>九條入庫規則</caption>
+    <thead><tr><th class="n">#</th><th>問題</th><th>實測案例</th><th>處理規則</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td>來源無更新日期</td><td>golf168 全表未標日</td><td>無日期者不進主序列，僅作交叉驗證</td></tr>
+      <tr><td class="n">2</td><td>民國／西元混用</td><td>115/08/17 vs 2026/08/19</td><td>入庫一律轉 ISO 8601</td></tr>
+      <tr><td class="n">3</td><td>單點價與區間價並存</td><td>惠豐 94% 為區間、公道 4%</td><td>統一存 <code>low</code>／<code>high</code>／<code>mid</code>；單點價 low=high</td></tr>
+      <tr><td class="n">4</td><td>保證金內含於牌價</td><td>「180(160保)」「400(220保)」「440(30保)」</td><td>拆為 <code>quote</code> 與 <code>deposit</code>，另計淨價</td></tr>
+      <tr><td class="n">5</td><td>類別命名不一致</td><td>股東個人／股東+眷屬／尊榮個人／二手個人／擊球權個人</td><td>建立 <code>membership_class</code> 受控詞彙，禁止以球場名單獨 JOIN</td></tr>
+      <tr><td class="n">6</td><td>年費／季費單位混用</td><td>大溪：一家「季 3,000」、兩家「年 12,000」</td><td>一律換算為年化金額並保留原始字串</td></tr>
+      <tr><td class="n">7</td><td>狀態值混入數值欄</td><td>暫停過戶／停止交易／停止營業／詢價</td><td>獨立 <code>status</code> 列舉欄；價格欄為 null</td></tr>
+      <tr><td class="n">8</td><td>費用欄位彼此矛盾</td><td>大崗山過戶費 10 vs 20 萬；清泉崗年費 2,200 vs 3,300</td><td>費用欄同樣取多源共識，分歧超過 20% 標記待查</td></tr>
+      <tr><td class="n">9</td><td>陳舊值混入</td><td>台北團體 830 vs 三家 1,290</td><td>共識價取<strong>中位數</strong>；偏離中位數 &gt;10% 者自動掛旗</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>共識價演算法</h4>
+  <div class="formula">consensus_mid = median( source_mid[ i ] )          # 中位數，抗單一陳舊值
+dispersion   = ( max − min ) / mean( source_mid )
+confidence   = A  若 n≥3 且 dispersion ≤ 2%
+               B  若 n≥3 且 dispersion ≤ 5%
+               C  若 n≥2 或 dispersion &gt; 5%      → 頁面顯示「報價分歧」提示
+               —  若 n=1                          → 不顯示共識價，只列原始來源</div>
+
+  <p>信心等級要<strong>顯示在畫面上</strong>，不是只存在資料庫。使用者看到 C 級的「幸福眷屬證」時，應該同時看到四家的原始報價與各自日期，自己判斷。這是本站與仲介行情表最根本的差別：仲介給一個數字，本站給一個數字加上它有多可信。</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <div class="head"><span class="num">05</span><h2>產品定位與使用者</h2>
+    <p>投資為主、打球價差為輔，這句話在資訊架構上的具體意義。</p></div>
+  <div class="body">
+
+  <div class="scroller">
+  <table>
+    <caption>三種使用者與其首要任務</caption>
+    <thead><tr><th>對象</th><th>來的時候在想什麼</th><th>首要任務</th><th>權重</th></tr></thead>
+    <tbody>
+      <tr><td class="name">投資者<br><span class="dim">潛在買方</span></td><td>這個資產類別值不值得配置？哪一檔漲得最好？</td><td>看指數、看排行、看單檔歷史走勢與報酬統計</td><td><span class="chip ok">主</span></td></tr>
+      <tr><td class="name">持證人<br><span class="dim">潛在賣方</span></td><td>我這張現在值多少？該不該賣？</td><td>單檔頁：共識價、與同區比較、持有至今的報酬</td><td><span class="chip ok">主</span></td></tr>
+      <tr><td class="name">重度球友<br><span class="dim">使用者導向</span></td><td>我一年打這麼多場，買證會不會比較划算？</td><td>損益兩平試算器：輸入年打球場次與平假日比例</td><td><span class="chip mid">輔</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>「投資為主、打球為輔」的實作意義</strong>：首頁的主視覺是指數與排行，不是球場列表；打球價差不是獨立分頁，而是<strong>被折算成報酬率的一部分</strong>，出現在每一檔球證的績效欄位裡。一張證每年替你省下的擊球費，在本站的模型中就是它的配息。</p>
+
+  <div class="note"><b>為什麼不做撮合。</b>撮合會讓本站變成交易一方，立刻產生報價中立性的疑慮——而中立正是本站唯一的護城河。仲介商公布行情是為了促成交易，本站彙整行情是為了呈現分歧，兩者的立場必須看得出來不同。</div>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <div class="head"><span class="num">06</span><h2>功能規劃</h2>
+    <p>依「沒有它就無法回答核心問題」的程度分三批。</p></div>
+  <div class="body">
+
+  <div class="phase">
+    <p class="pk">MVP · 必要</p>
+    <h3>把資料變成可信的數字</h3>
+    <p class="when">目標：回答「這張證現在值多少、買下來真正要花多少」</p>
+    <ul>
+      <li><strong>球證資料庫</strong>：約 55 座球場 × 各會員類別，含共識價、四源原始報價、信心等級。</li>
+      <li><strong>總取得成本計算</strong>：共識價 + 過戶費 − 可退保證金，並顯示過戶費率。</li>
+      <li><strong>單檔頁</strong>：現價、各來源比對、過戶費／年費、球場基本資料、會員與來賓收費。</li>
+      <li><strong>擊球費對照表</strong>：會員與來賓、平日與假日，四格價差一次看完。</li>
+      <li><strong>損益兩平試算器</strong>：輸入年場次與假日比例，輸出「幾年回本」與「每年淨成本」。</li>
+      <li><strong>制度知識庫</strong>：股東制 vs 會員制、記名方式、過戶流程、財產交易所得稅。</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <p class="pk">P1 · 核心價值</p>
+    <h3>把數字變成時間序列</h3>
+    <p class="when">目標：回答「過去漲了多少、波動多大」</p>
+    <ul>
+      <li><strong>歷史行情回溯</strong>：抓取民國 76–115 年的 41 個年度頁，建立月度序列。<b>實作後結果：25,376 筆月度報價，475 期。</b></li>
+      <li><strong>台灣球證指數（TGMI）</strong>：全市場、分區、分價格帶，含成分與計算過程公開頁。</li>
+      <li><strong>單檔績效卡</strong>：年化報酬、年化波動、最大回撤、與指數的相對強弱。</li>
+      <li><strong>漲跌排行與異動提醒</strong>：本月漲最多／跌最多、過戶費調整、停止過戶等狀態變化。</li>
+      <li><strong>制度異動時間軸</strong>：過戶費、年費、保證金與球場營運狀態的變更紀錄。</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <p class="pk">P2 · 延伸</p>
+    <h3>把台灣放進區域脈絡</h3>
+    <p class="when">目標：回答「相對於日韓泰越，台灣現在貴不貴」</p>
+    <ul>
+      <li><strong>亞洲比較頁</strong>：日本（預託金制／株主制、連 5 年上漲）、韓國（會員制／大眾型／非會員制三級制、ACEPI 指數）、泰國（月費侵蝕價差）、越南（有到期日的攤銷型會員卡）。</li>
+      <li><strong>制度對照表</strong>：法律性質、次級市場成熟度、持有成本、主要風險。</li>
+      <li><strong>個人持倉管理</strong>：登錄自己的球證與買入價，追蹤未實現損益與已省下的擊球費。</li>
+      <li><strong>稅務試算</strong>：出售時的財產交易所得估算（可減除仲介費與過戶費，年費不可減）。</li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <div class="head"><span class="num">07</span><h2>核心指標定義</h2>
+    <p>五個必須寫死在文件裡、不能各頁各算的定義。</p></div>
+  <div class="body">
+
+  <h3>7.1 淨價（Net Price）</h3>
+  <p>牌價裡若含可退還保證金，該部分不是沉沒成本。</p>
+  <div class="formula">net_price = consensus_mid − refundable_deposit</div>
+  <p class="dim" style="font-size:14px">例：八里國際「180(160保)」→ 淨價 20 萬。這張證的真實價格是 20 萬，不是 180 萬。</p>
+
+  <h3>7.2 總取得成本（All-in Cost）</h3>
+  <div class="formula">all_in = consensus_mid + transfer_fee + brokerage_fee</div>
+  <p class="dim" style="font-size:14px">例：東方個人證 1,695 + 200 = 1,895 萬，過戶費率 11.8%。翡翠個人證 6.5 + 10 = 16.5 萬，過戶費率 154%。</p>
+
+  <h3>7.3 隱含使用價值（Implied Play Value）</h3>
+  <p>球證的「配息」——每年因會員身分省下的擊球費。</p>
+  <div class="formula">play_value = ( guest_weekday − member_weekday ) × rounds_weekday
+           + ( guest_weekend − member_weekend ) × rounds_weekend</div>
+  <p class="dim" style="font-size:14px">例：第一球場假日價差 4,500 − 1,750 = 2,750 元／場；大屯球場會員與來賓同價，價差 0。同樣是三百多萬的股東證，一張有配息、一張沒有。</p>
+
+  <h3>7.4 損益兩平打球場次（Break-even Rounds）</h3>
+  <div class="formula">annual_carry  = all_in × cost_of_capital + annual_dues
+breakeven_rounds = annual_carry ÷ per_round_saving</div>
+  <p class="dim" style="font-size:14px">例：第一股東個人證 all-in 351 萬，資金成本設 2.5% → 年持有成本 87,750 元；除以假日價差 2,750 元 ≈ <strong>每年 32 場</strong>才打平。大屯因價差為 0，此值為無限大——它的價值必須完全由資本利得與土地權利承擔。</p>
+
+  <h3>7.5 台灣球證指數 TGMI</h3>
+  <p>指數的設計必須先解決兩個問題。第一，東方 1,695 萬與嘉光 6 萬若用市值加權，指數會變成「東方走勢圖」，因此採等權重。第二，涵蓋標的數由 1987 年的約 10 檔成長到 2026 年的約 70 檔，直接跨期比較會把「成分變多」誤讀成「價格上漲」，因此採鏈式連接：每期只比較同時存在於前後兩期的標的。</p>
+  <div class="formula">TGMI[t] = TGMI[t−1] × GM( price[i,t] / price[i,t−1] )
+
+GM  = 幾何平均（價格指數標準做法，避免算術平均的向上偏誤）
+i   ∈ 同時存在於 t−1 與 t 兩期的標的（鏈式連接 chain-linking）
+每期最少可比標的數 = 5，不足則指數延續前值
+權重 = 等權重；另發布 6 個分區與 3 個價格帶子指數
+基期 = 1987 年 1 月 = 100</div>
+  <div class="flagbox"><span class="tag">v0.9 的錯誤 · 已更正</span>
+  v0.9 寫的成分條件是「連續 24 個月有 <b>≥3 來源</b>報價，且信心等級 ≥ B」。
+  這個條件<b>無法成立</b>：歷史序列只有悅來一家提供，四來源交叉驗證僅適用於當期報價。
+  照原規則，1987–2025 年的指數一筆都算不出來。<br><br>
+  正確做法是把指數切成兩段，並在圖上標示接縫：
+  <b>歷史段（1987-01 – 2025-12）為單一來源重建</b>，明確標記未經交叉驗證；
+  <b>即時段（2026-01 起）</b>採四來源共識，信心等級 ≥ B。
+  網站的指數頁已依此標示。</div>
+
+  <p>基期設 1987 年 1 月 = 100，即資料的起點。實作結果：40 年全期年化 +6.14%，
+  1990 年 4 月見頂（963.2），2003 年 4 月觸底（309.1，<strong>−67.9%</strong>），
+  2026 年 1 月才收復 1990 年高點，歷時 <strong>35.8 年</strong>。
+  分價格帶子指數用來檢驗「頂級證與低價證是不是兩個獨立市場」——目前分為
+  千萬級 5 檔、百萬級 54 檔、百萬以下 10 檔。</p>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <div class="head"><span class="num">08</span><h2>資料架構與技術選型</h2>
+    <p>規模很小、正確性很重要，架構應該偏保守。</p></div>
+  <div class="body">
+
+  <h4>資料模型</h4>
+  <div class="scroller">
+  <table>
+    <caption>核心資料表</caption>
+    <thead><tr><th>資料表</th><th>關鍵欄位</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td class="name">course</td><td>id, name, aliases[], region, holes, org_type, opened</td><td><code>aliases</code> 必要：各家用「台灣(老淡水)」「台灣老淡水」「老淡水」指同一場</td></tr>
+      <tr><td class="name">membership</td><td>id, course_id, class, deposit, transfer_fee, annual_dues, status</td><td><code>class</code> 為受控詞彙，非自由文字</td></tr>
+      <tr><td class="name">quote</td><td>membership_id, source_id, quote_date, low, high, raw_text</td><td><code>raw_text</code> 永遠保留原始字串以供稽核</td></tr>
+      <tr><td class="name">consensus</td><td>membership_id, month, mid, dispersion, n_sources, confidence</td><td>每月一筆，由 quote 計算後物化</td></tr>
+      <tr><td class="name">green_fee</td><td>course_id, member_wd, member_we, guest_wd, guest_we, effective_from</td><td>四格價差的來源</td></tr>
+      <tr><td class="name">index_value</td><td>index_code, month, value, constituents[]</td><td>成分需可還原，指數才可信</td></tr>
+      <tr><td class="name">event</td><td>course_id, date, type, before, after, source_url</td><td>過戶費調整、停止過戶、球場關閉等制度異動</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>資料管線</h4>
+  <ol>
+    <li><strong>擷取</strong>：每週一次；各來源獨立 parser；原始 HTML 存檔留證。</li>
+    <li><strong>正規化</strong>：套用第 4 章九條規則，輸出結構化 quote。</li>
+    <li><strong>比對</strong>：計算共識價、極差率、信心等級。</li>
+    <li><strong>掛旗</strong>：dispersion &gt; 5%、偏離中位數 &gt; 10%、狀態變更、單源孤證 → 進人工複核佇列。</li>
+    <li><strong>發布</strong>：複核通過後寫入 consensus 並重算指數。</li>
+  </ol>
+
+  <div class="flagbox"><span class="tag">不自動化的部分</span>
+  <strong>人工複核不可省略。</strong>本次實測 53 筆中有 11 筆需要人工判斷，而且判斷理由各不相同（陳舊、保證金、流動性、類別錯位）——這是規則引擎抓得到「有問題」、但抓不到「是什麼問題」的典型情境。每月約 10–15 筆的複核量，一個人半小時可以完成，不值得為了自動化而犧牲正確性。</div>
+
+  <h4>技術選型</h4>
+  <div class="scroller">
+  <table>
+    <thead><tr><th>層</th><th>選擇</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td class="name">資料庫</td><td>PostgreSQL</td><td>資料量以萬筆計，需要的是正確的型別、約束與交易，不是規模</td></tr>
+      <tr><td class="name">擷取</td><td>Python + httpx + selectolax</td><td>來源皆為靜態表格；部分為 Big5 編碼與 http-only，需自訂編碼處理</td></tr>
+      <tr><td class="name">排程</td><td>cron 或 GitHub Actions</td><td>每週一次，不需要工作流引擎</td></tr>
+      <tr><td class="name">前端</td><td>SvelteKit 或 Next.js，SSG 為主</td><td>內容以每週更新的靜態頁為主，只有試算器需要互動</td></tr>
+      <tr><td class="name">圖表</td><td>自繪 SVG 或 uPlot</td><td>圖表型態少（線圖、橫條），不值得引入重量級套件</td></tr>
+      <tr><td class="name">人工複核</td><td>內部後台，左右並排原始值與建議值</td><td>複核的關鍵是看得到四家原文，不是漂亮的介面</td></tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+  <div class="head"><span class="num">09</span><h2>開發里程碑</h2>
+    <p>以「能回答哪個問題」為驗收標準，而非以功能數量。</p></div>
+  <div class="body">
+  <div class="scroller">
+  <table>
+    <caption>四階段 · 實作進度</caption>
+    <thead><tr><th>階段</th><th>狀態</th><th>產出</th><th>驗收：能回答的問題</th></tr></thead>
+    <tbody>
+      <tr><td class="name">M1 資料地基</td><td><span class="chip ok">已完成</span></td><td>四來源 parser、正規化規則、共識演算法、複核後台</td><td>「這張證四家報多少？共識價與可信度？」</td></tr>
+      <tr><td class="name">M2 首個公開版</td><td><span class="chip ok">已完成</span></td><td>單檔頁、擊球費對照、總取得成本、損益兩平試算器、制度知識庫</td><td>「買這張證真正要花多少？我這種打法划算嗎？」</td></tr>
+      <tr><td class="name">M3 時間軸</td><td><span class="chip ok">已完成</span></td><td>歷史回溯至<b>民國 76 年（1987）</b>、TGMI 指數（全市場＋6 分區＋3 價格帶）、績效卡、漲跌排行、球場走勢、年度查詢</td><td>「過去五年年化多少？波動多大？領漲還落後？」</td></tr>
+      <tr><td class="name">M4 區域脈絡</td><td><span class="chip mid">部分完成</span></td><td>日韓泰越比較頁<b>已完成</b>；持倉管理與稅務試算未實作</td><td>「相對於鄰近國家，台灣現在的價位合理嗎？」</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><strong>M1 是唯一不能壓縮的階段。</strong>第 3 章已經證明，這個專案的成敗不在前端，在於能不能穩定地把四份格式不一的表格變成一組可信的數字。地基沒做好，後面每一張圖都是錯的。</p>
+
+  <div class="note"><b>實作後的修正：M3 的優先順序判斷錯了。</b>
+  v0.9 把歷史回溯排在 M3，視為「錦上添花」。實際做下去才發現，
+  <b>40 年月度序列才是這個專案唯一難以被複製的資產</b>——
+  當期報價任何人抓一次就有，但把 41 個年度頁、25,376 筆報價清理成一條可用的指數，
+  需要別名對照、類別正規化、來源錯字偵測與鏈式連接，這些工作本身就是護城河。
+  若重新規劃，歷史回溯應與 M1 併行，而非等到 M2 之後。</div>
+
+  <h4>實作過程中發現、規劃時未預期的問題</h4>
+  <div class="scroller">
+  <table>
+    <caption>只有真的把資料跑過才會遇到的事</caption>
+    <thead><tr><th>問題</th><th>徵狀</th><th>處理</th></tr></thead>
+    <tbody>
+      <tr><td class="name">HTML 標籤直接移除</td><td>指數算出 128 倍。<code>95&lt;/font&gt;95</code> 被併成 <code>9595</code></td><td>標籤一律替換為空白而非刪除</td></tr>
+      <tr><td class="name">來源表格打字錯誤</td><td>第一球場某月 701（其餘月份 70–71）、北海 612（其餘 62）</td><td>單月尖峰且次月反向回復 → 判定錯字，以前後月幾何平均取代，7 筆全部公開留存</td></tr>
+      <tr><td class="name">算術平均的向上偏誤</td><td>鏈式連接用算術平均，長期累積出虛假漲幅</td><td>改用幾何平均</td></tr>
+      <tr><td class="name">年費欄含空格</td><td><code>年 : 6 ,000</code> 被讀成 6 元，直接污染損益兩平計算</td><td>先清除數字間空白與千分位，再解析</td></tr>
+      <tr><td class="name">說明文字混入數值欄</td><td>「115年10月起過戶費調整170萬」被讀成「年 10」</td><td>先移除民國日期片語；並設年費合理性下限 500 元</td></tr>
+      <tr><td class="name">擊球費會員價抽取失敗</td><td>5 座球場算出會員價高於來賓價（誤抓桿弟費或保證金欄）</td><td>會員價 ≥ 來賓價一律剔除，可比較球場由 51 降為 46</td></tr>
+      <tr><td class="name">排程永遠讀到舊檔</td><td>抓取器只要檔案存在就跳過，週更等於沒更新</td><td>當期報價與近兩年度歷史頁強制重抓，往年永久快取</td></tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+  <div class="head"><span class="num">10</span><h2>風險與法遵</h2>
+    <p>包含幾項會直接影響專案可行性的項目。</p></div>
+  <div class="body">
+  <div class="scroller">
+  <table>
+    <caption>風險登記</caption>
+    <thead><tr><th>風險</th><th>影響</th><th>因應</th></tr></thead>
+    <tbody>
+      <tr><td class="name">牌價 ≠ 成交價</td><td>高</td><td>全站統一稱「參考行情」，不使用「成交價」「市價」；每頁頁尾聲明。長期以會員回報建立成交價樣本，但與牌價分開呈現</td></tr>
+      <tr><td class="name">來源網站改版或封鎖</td><td>高</td><td>四源冗餘，任一家失效仍可運作；原始 HTML 存檔；尊重 robots.txt，抓取頻率每週一次</td></tr>
+      <tr><td class="name">被認定為投資顧問</td><td>高</td><td>不提供個別標的買賣建議、不收顧問費、不做績效保證；定位為公開資訊彙整</td></tr>
+      <tr><td class="name">著作權爭議</td><td>中</td><td>行情數字為事實資料不受著作權保護，但不重製其表格編排；標明來源與連結；提供來源方的下架窗口</td></tr>
+      <tr><td class="name">流動性極低導致指數失真</td><td>中</td><td>每期最少 5 檔可比標的，不足則指數延續前值；低信心標的仍顯示於單檔頁</td></tr>
+      <tr><td class="name">單一標的主導指數</td><td>中</td><td>採等權重；另發布分區與分價格帶子指數</td></tr>
+      <tr><td class="name">政策風險（供給端反轉）</td><td>中</td><td>本站不預測；但「制度異動時間軸」會完整記錄土地徵收、開發管制等事件，供使用者自行判斷</td></tr>
+      <tr><td class="name">使用者個資</td><td>低</td><td>持倉管理採本機儲存優先；若需帳號，僅存 email 與持倉，不存身分證字號或球證號碼</td></tr>
+      <tr><td class="name"><b>歷史指數為單一來源</b></td><td><b>高</b></td><td><span class="chip warn">未解決</span> 1987–2025 的序列僅悅來一家提供，無法交叉驗證。已於網站明確標示為「單源重建」。若要消除此風險，須取得第二份歷史資料（可能需付費）</td></tr>
+      <tr><td class="name"><b>保證金可退性未查證</b></td><td><b>高</b></td><td><span class="chip warn">未解決</span>「淨價 ＝ 牌價 − 保證金」的公式，是從「180(160保)」這類標記推斷而來，<b>未向任何球場確認</b>。若保證金隨證移轉而非可退還，此指標方向錯誤。須逐場以電話確認</td></tr>
+      <tr><td class="name">擊球費資料品質遠低於球證報價</td><td>中</td><td><span class="chip mid">已標示</span> 來賓假日價的四源極差率中位數約 24%（球證報價為 3.0%）；會員價多藏在備註文字，5 座球場抽取失敗已剔除。網站已在該頁最上方聲明僅供量級參考</td></tr>
+      <tr><td class="name">來源改版導致資料悄悄變少</td><td>中</td><td><span class="chip ok">已處理</span> 自動更新最危險的失敗不是抓不到（會報錯），而是只抓到一半仍照常發布。建置流程加入哨兵檢查：報價筆數、共識標的數、各來源解析列數、指數單月跳動皆設下限，任一未過即中止建置</td></tr>
+      <tr><td class="name">四來源服務條款未確認</td><td>中</td><td><span class="chip warn">未解決</span> robots.txt 已確認（悅來明示 Allow: /，其餘三家無 robots.txt），但服務條款尚未逐一檢視。公開上線前必須完成，並設置來源方的下架聯絡窗口</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="flagbox"><span class="tag">必讀聲明</span>
+  本報告書所引用之球證價格，皆為各仲介公司公開發布之<strong>參考行情</strong>，非實際成交價；實際成交價依市場供需而定，過戶費依例由買方負擔。本文件為系統開發之分析依據，不構成任何投資建議、要約或招攬。球證屬流動性極低之另類資產，日本市場曾於 1990 年後三年內下跌約 75%，部分標的自高點跌至二十四分之一，投資前應充分理解流動性與價格風險。</div>
+  </div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="s11">
+  <div class="head"><span class="num">11</span><h2>資料來源</h2>
+    <p>本報告書所有數字的出處，均於 2026 年 9 月 6 日查證。</p></div>
+  <div class="body">
+  <h4>行情與收費（台灣）</h4>
+  <ul>
+    <li><a class="ext" href="https://ylgolf.com.tw/market/latest/">悅來高爾夫 — 會員證最新行情</a>（製表 115/08/26）、<a class="ext" href="https://ylgolf.com.tw/market/charge/">球場收費表</a>、<a class="ext" href="https://ylgolf.com.tw/market/history/">各年度行情（民國 76–115）</a></li>
+    <li><a class="ext" href="http://golf888.com.tw/latest.aspx">公道國際高爾夫 — 會員證最新行情</a>（公布 2026/08/19）</li>
+    <li><a class="ext" href="https://hfgolfservice.com/index.php/Membership/membership">惠豐高爾夫 — 會員證最新行情</a>（更新 115/08/17）</li>
+    <li><a class="ext" href="http://www.golf168.com.tw/new_page_2.htm">golf168 — 高爾夫會員證行情表</a>（未標示日期）</li>
+    <li><a class="ext" href="https://www.golf1789.com/headlinecontext.asp?newsno=2">銘流高爾夫 — 會員證（球證）簡介</a>（制度分類）</li>
+    <li><a class="ext" href="https://www.ctee.com.tw/news/20260115700098-439901">工商時報 — 全台高球證行情飛漲</a>（2026/01/15）</li>
+  </ul>
+  <h4>稅務（台灣）</h4>
+  <ul>
+    <li><a class="ext" href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL006436">財政部 — 個人出售高爾夫球會員證屬財產交易所得，其成本費用認列原則</a></li>
+    <li><a class="ext" href="https://law-out.mof.gov.tw/LawContent.aspx?id=GL000753">財政部 — 高爾夫球場股票過戶手續費應課娛樂稅</a></li>
+  </ul>
+  <h4>鄰近國家</h4>
+  <ul>
+    <li><a class="ext" href="https://www.plus-web.co.jp/faq/membership/deposit-shareholder.html">ゴルフホットライン — 預託金制と株主制の違い</a>、<a class="ext" href="https://www.plus-web.co.jp/trend/">相場推移・動向</a></li>
+    <li><a class="ext" href="https://www.nikkei.com/article/DGXZQOUB099VF0Z00C26A1000000/">日本經濟新聞 — ゴルフ会員権、5 年連続上昇</a></li>
+    <li><a class="ext" href="https://www.tk-golf.com/column/3104.html">TKゴルフサービス — ゴルフ会員権相場の変遷</a>（泡沫期資料）</li>
+    <li><a class="ext" href="https://www.golfjournal.co.kr/news/articleView.html?idxno=3486">골프저널 — 회원제 / 비회원제 / 대중형 三級制</a></li>
+    <li><a class="ext" href="http://www.golfbiz.co.kr/news/articleView.html?idxno=25437">골프경제신문 — 2026 年 1 月會員權排行</a></li>
+    <li><a class="ext" href="https://www.thailandgolfzone.com/thailand-golf-holidays-and-vacations/thailand_golf_c_1/">Thailand Golf Zone — Club Memberships</a>、<a class="ext" href="https://www.golflux.com/cost-of-golf-in-thailand/">GolfLux — Cost of Golf in Thailand</a></li>
+    <li><a class="ext" href="https://gogolfvietnam.com/vietnam-golf-costs-explained-green-fees-caddies-and-carts/">GoGolf Vietnam — Green Fees, Caddies &amp; Carts 2026</a>、<a class="ext" href="https://www.dulichgolf.com/dich-vu-mua-ban-chuyen-nhuong-the-hoi-vien-san-golf-tam-dao.html">dulichgolf — 會員卡轉讓</a></li>
+  </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    球證行情所 · 開發分析報告書 v1.0　|　製表 2026-09-06　|　資料基準：球證報價 民國 115 年 8 月 · 歷史序列 1987-01 至 2026-07<br>
+    本文件所引數字均為各仲介公開之參考行情，非成交價，不構成投資建議。
+  </div>
+</footer>

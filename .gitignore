@@ -1,0 +1,14 @@
+# 抓取下來的第三方原始頁面不入庫（僅供本機稽核，避免逐字轉散布）
+pipeline/raw/
+dist/
+site/app.html
+__pycache__/
+*.pyc
+.DS_Store
+
+# 個人草稿，不公開
+社群貼文草稿.md
+
+# GitHub Actions 工作流程：需要 token 具備 workflow scope 才能推送。
+# 加開權限後把下面這行刪掉再 commit 即可，指令見 DEPLOY.md。
+.github/workflows/

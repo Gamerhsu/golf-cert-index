@@ -1,0 +1,4036 @@
+[
+{
+"course": "東方",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 2180.0,
+"high": 2200.0,
+"status": null,
+"raw": "2180-2200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 2200.0,
+"high": 2200.0,
+"status": null,
+"raw": "2200",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 2200.0,
+"high": 2200.0,
+"status": null,
+"raw": "2200",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 2200.0,
+"high": 2200.0,
+"status": null,
+"raw": "2200",
+"date": null
+}
+},
+"transfer_fee": 300.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 2200.0,
+"dispersion": 0.46,
+"lo": 2190.0,
+"hi": 2200.0,
+"confidence": "A",
+"net_price": 2200.0,
+"all_in": 2500.0,
+"fee_rate": 13.6,
+"status": null
+},
+{
+"course": "東方",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 1680.0,
+"high": 1700.0,
+"status": null,
+"raw": "1680-1700",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 1700.0,
+"high": 1700.0,
+"status": null,
+"raw": "1700",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 1680.0,
+"high": 1700.0,
+"status": null,
+"raw": "1680-1700",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 1700.0,
+"high": 1700.0,
+"status": null,
+"raw": "1700",
+"date": null
+}
+},
+"transfer_fee": 200.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 1695.0,
+"dispersion": 0.59,
+"lo": 1690.0,
+"hi": 1700.0,
+"confidence": "A",
+"net_price": 1695.0,
+"all_in": 1895.0,
+"fee_rate": 11.8,
+"status": null
+},
+{
+"course": "林口",
+"klass": "股東眷屬",
+"region": "花東",
+"n_sources": 2,
+"quotes": {
+"godao": {
+"low": 1700.0,
+"high": 1700.0,
+"status": null,
+"raw": "1700",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 1670.0,
+"high": 1680.0,
+"status": null,
+"raw": "1670-1680",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 1687.5,
+"dispersion": 1.48,
+"lo": 1675.0,
+"hi": 1700.0,
+"confidence": "C",
+"net_price": 1687.5,
+"all_in": 1707.5,
+"fee_rate": 1.2,
+"status": null
+},
+{
+"course": "林口",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 2,
+"quotes": {
+"huifeng": {
+"low": 1640.0,
+"high": 1650.0,
+"status": null,
+"raw": "1640-1650",
+"date": "2026-08-17"
+},
+"golf168": {
+"low": 1650.0,
+"high": 1670.0,
+"status": null,
+"raw": "1650-1670",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4014.0,
+"deposit": null,
+"mid": 1652.5,
+"dispersion": 0.91,
+"lo": 1645.0,
+"hi": 1660.0,
+"confidence": "C",
+"net_price": 1652.5,
+"all_in": 1672.5,
+"fee_rate": 1.2,
+"status": null
+},
+{
+"course": "美麗華",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 1460.0,
+"high": 1470.0,
+"status": null,
+"raw": "1460-1470",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 1500.0,
+"high": 1500.0,
+"status": null,
+"raw": "1500",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 1500.0,
+"high": 1500.0,
+"status": null,
+"raw": "1500",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 1480.0,
+"high": 1480.0,
+"status": null,
+"raw": "1480",
+"date": null
+}
+},
+"transfer_fee": 220.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 1490.0,
+"dispersion": 2.35,
+"lo": 1465.0,
+"hi": 1500.0,
+"confidence": "B",
+"net_price": 1490.0,
+"all_in": 1710.0,
+"fee_rate": 14.8,
+"status": null
+},
+{
+"course": "台北",
+"klass": "團體",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 1300.0,
+"high": 1320.0,
+"status": null,
+"raw": "1300-1320",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 830.0,
+"high": 830.0,
+"status": null,
+"raw": "830",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 1250.0,
+"high": 1280.0,
+"status": null,
+"raw": "1250-1280",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 1300.0,
+"high": 1320.0,
+"status": null,
+"raw": "1300-1320",
+"date": null
+}
+},
+"transfer_fee": 18.4,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 1287.5,
+"dispersion": 40.72,
+"lo": 830.0,
+"hi": 1310.0,
+"confidence": "C",
+"net_price": 1287.5,
+"all_in": 1305.9,
+"fee_rate": 1.4,
+"status": null
+},
+{
+"course": "美麗華",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 1190.0,
+"high": 1200.0,
+"status": null,
+"raw": "1190-1200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 1250.0,
+"high": 1250.0,
+"status": null,
+"raw": "1250",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 1200.0,
+"high": 1200.0,
+"status": null,
+"raw": "1200",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 1200.0,
+"high": 1200.0,
+"status": null,
+"raw": "1200",
+"date": null
+}
+},
+"transfer_fee": 140.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 1200.0,
+"dispersion": 4.54,
+"lo": 1195.0,
+"hi": 1250.0,
+"confidence": "B",
+"net_price": 1200.0,
+"all_in": 1340.0,
+"fee_rate": 11.7,
+"status": null
+},
+{
+"course": "長庚",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 5,
+"quotes": {
+"huifeng": {
+"low": 875.0,
+"high": 895.0,
+"status": null,
+"raw": "875-895",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 880.0,
+"high": 900.0,
+"status": null,
+"raw": "880﹑900",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 920.0,
+"high": 940.0,
+"status": null,
+"raw": "920﹑940",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 955.0,
+"high": 955.0,
+"status": null,
+"raw": "955",
+"date": null
+}
+},
+"transfer_fee": 40.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 930.0,
+"dispersion": 7.62,
+"lo": 885.0,
+"hi": 955.0,
+"confidence": "C",
+"net_price": 930.0,
+"all_in": 970.0,
+"fee_rate": 4.3,
+"status": null
+},
+{
+"course": "台灣(老淡水)",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 930.0,
+"high": 940.0,
+"status": null,
+"raw": "930-940",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 910.0,
+"high": 910.0,
+"status": null,
+"raw": "910",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 930.0,
+"high": 950.0,
+"status": null,
+"raw": "930-950",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 920.0,
+"high": 920.0,
+"status": null,
+"raw": "920",
+"date": null
+}
+},
+"transfer_fee": 45.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 26000.0,
+"deposit": null,
+"mid": 927.5,
+"dispersion": 3.24,
+"lo": 910.0,
+"hi": 940.0,
+"confidence": "B",
+"net_price": 927.5,
+"all_in": 972.5,
+"fee_rate": 4.9,
+"status": null
+},
+{
+"course": "大溪",
+"klass": "股東眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 865.0,
+"high": 870.0,
+"status": null,
+"raw": "865-870",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 870.0,
+"high": 870.0,
+"status": null,
+"raw": "870",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 870.0,
+"high": 880.0,
+"status": null,
+"raw": "870-880",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 870.0,
+"high": 870.0,
+"status": null,
+"raw": "870",
+"date": null
+}
+},
+"transfer_fee": 75.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 24000.0,
+"deposit": null,
+"mid": 870.0,
+"dispersion": 0.86,
+"lo": 867.5,
+"hi": 875.0,
+"confidence": "A",
+"net_price": 870.0,
+"all_in": 945.0,
+"fee_rate": 8.6,
+"status": null
+},
+{
+"course": "新竹(新豐)",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 3,
+"quotes": {
+"huifeng": {
+"low": 820.0,
+"high": 830.0,
+"status": null,
+"raw": "820-830",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 830.0,
+"high": 830.0,
+"status": null,
+"raw": "830",
+"date": "2026-08-19"
+},
+"golf168": {
+"low": 830.0,
+"high": 830.0,
+"status": null,
+"raw": "830",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 830.0,
+"dispersion": 0.6,
+"lo": 825.0,
+"hi": 830.0,
+"confidence": "A",
+"net_price": 830.0,
+"all_in": 850.0,
+"fee_rate": 2.4,
+"status": null
+},
+{
+"course": "新竹(新豐)",
+"klass": "股東眷屬",
+"region": "竹苗",
+"n_sources": 1,
+"quotes": {
+"ylgolf": {
+"low": 830.0,
+"high": 830.0,
+"status": null,
+"raw": "830",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 830.0,
+"dispersion": 0.0,
+"lo": 830.0,
+"hi": 830.0,
+"confidence": "—",
+"net_price": 830.0,
+"all_in": 850.0,
+"fee_rate": 2.4,
+"status": null
+},
+{
+"course": "台灣(老淡水)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 730.0,
+"high": 735.0,
+"status": null,
+"raw": "730-735",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 735.0,
+"high": 735.0,
+"status": null,
+"raw": "735",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 750.0,
+"high": 760.0,
+"status": null,
+"raw": "750-760",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 750.0,
+"high": 750.0,
+"status": null,
+"raw": "750",
+"date": null
+}
+},
+"transfer_fee": 35.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 13000.0,
+"deposit": null,
+"mid": 742.5,
+"dispersion": 3.03,
+"lo": 732.5,
+"hi": 755.0,
+"confidence": "B",
+"net_price": 742.5,
+"all_in": 777.5,
+"fee_rate": 4.7,
+"status": null
+},
+{
+"course": "東華",
+"klass": "尊榮個人",
+"region": "台北新北",
+"n_sources": 2,
+"quotes": {
+"ylgolf": {
+"low": 660.0,
+"high": 700.0,
+"status": null,
+"raw": "700萬、660萬(優惠專案)",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 700.0,
+"high": 700.0,
+"status": null,
+"raw": "700",
+"date": null
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": 690.0,
+"dispersion": 2.9,
+"lo": 680.0,
+"hi": 700.0,
+"confidence": "C",
+"net_price": 690.0,
+"all_in": 690.0,
+"fee_rate": 0.0,
+"status": null
+},
+{
+"course": "永漢",
+"klass": "個人",
+"region": "花東",
+"n_sources": 5,
+"quotes": {
+"huifeng": {
+"low": 660.0,
+"high": 665.0,
+"status": null,
+"raw": "660-665",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 670.0,
+"high": 670.0,
+"status": null,
+"raw": "670(200保)",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 670.0,
+"high": 670.0,
+"status": null,
+"raw": "670(200保)",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 630.0,
+"high": 630.0,
+"status": null,
+"raw": "630",
+"date": null
+}
+},
+"transfer_fee": 80.5,
+"transfer_fee_spread": 0.0,
+"annual_dues": 11200.0,
+"deposit": 200.0,
+"mid": 670.0,
+"dispersion": 6.06,
+"lo": 630.0,
+"hi": 670.0,
+"confidence": "C",
+"net_price": 470.0,
+"all_in": 750.5,
+"fee_rate": 12.0,
+"status": null
+},
+{
+"course": "彰化",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 655.0,
+"high": 660.0,
+"status": null,
+"raw": "655-660",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 670.0,
+"high": 670.0,
+"status": null,
+"raw": "670",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 660.0,
+"high": 665.0,
+"status": null,
+"raw": "660-665",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 660.0,
+"high": 665.0,
+"status": null,
+"raw": "660-665",
+"date": null
+}
+},
+"transfer_fee": 4.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 662.5,
+"dispersion": 1.89,
+"lo": 657.5,
+"hi": 670.0,
+"confidence": "A",
+"net_price": 662.5,
+"all_in": 666.5,
+"fee_rate": 0.6,
+"status": null
+},
+{
+"course": "大溪",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 2,
+"quotes": {
+"huifeng": {
+"low": 630.0,
+"high": 635.0,
+"status": null,
+"raw": "630-635",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 660.0,
+"high": 660.0,
+"status": null,
+"raw": "660",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": null
+}
+},
+"transfer_fee": 50.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 12000.0,
+"deposit": null,
+"mid": 646.2,
+"dispersion": 4.26,
+"lo": 632.5,
+"hi": 660.0,
+"confidence": "C",
+"net_price": 646.2,
+"all_in": 696.2,
+"fee_rate": 7.7,
+"status": null
+},
+{
+"course": "長庚",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 635.0,
+"high": 640.0,
+"status": null,
+"raw": "635-640",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 650.0,
+"high": 650.0,
+"status": null,
+"raw": "650",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 640.0,
+"high": 640.0,
+"status": null,
+"raw": "640",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 650.0,
+"high": 650.0,
+"status": null,
+"raw": "650",
+"date": null
+}
+},
+"transfer_fee": 30.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 645.0,
+"dispersion": 1.94,
+"lo": 637.5,
+"hi": 650.0,
+"confidence": "A",
+"net_price": 645.0,
+"all_in": 675.0,
+"fee_rate": 4.7,
+"status": null
+},
+{
+"course": "南一",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 615.0,
+"high": 620.0,
+"status": null,
+"raw": "615-620",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 630.0,
+"high": 630.0,
+"status": null,
+"raw": "630",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 620.0,
+"high": 620.0,
+"status": null,
+"raw": "620",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 620.0,
+"high": 620.0,
+"status": null,
+"raw": "620",
+"date": null
+}
+},
+"transfer_fee": 25.0,
+"transfer_fee_spread": 40.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 620.0,
+"dispersion": 2.01,
+"lo": 617.5,
+"hi": 630.0,
+"confidence": "B",
+"net_price": 620.0,
+"all_in": 645.0,
+"fee_rate": 4.0,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "眷屬",
+"region": "桃園",
+"n_sources": 1,
+"quotes": {
+"golf168": {
+"low": 615.0,
+"high": 620.0,
+"status": null,
+"raw": "615-620",
+"date": null
+}
+},
+"transfer_fee": 80.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 6000.0,
+"deposit": null,
+"mid": 617.5,
+"dispersion": 0.0,
+"lo": 617.5,
+"hi": 617.5,
+"confidence": "—",
+"net_price": 617.5,
+"all_in": 697.5,
+"fee_rate": 13.0,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "眷屬正式",
+"region": "花東",
+"n_sources": 3,
+"quotes": {
+"huifeng": {
+"low": 610.0,
+"high": 615.0,
+"status": null,
+"raw": "610-615",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 620.0,
+"high": 620.0,
+"status": null,
+"raw": "620",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 610.0,
+"high": 620.0,
+"status": null,
+"raw": "610-620",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 80.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 6000.0,
+"deposit": null,
+"mid": 615.0,
+"dispersion": 1.22,
+"lo": 612.5,
+"hi": 620.0,
+"confidence": "A",
+"net_price": 615.0,
+"all_in": 695.0,
+"fee_rate": 13.0,
+"status": null
+},
+{
+"course": "再興",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 605.0,
+"high": 610.0,
+"status": null,
+"raw": "605-610",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 610.0,
+"high": 610.0,
+"status": null,
+"raw": "610",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 620.0,
+"high": 620.0,
+"status": null,
+"raw": "620",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 615.0,
+"high": 620.0,
+"status": null,
+"raw": "615-620",
+"date": null
+}
+},
+"transfer_fee": 16.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 613.8,
+"dispersion": 2.04,
+"lo": 607.5,
+"hi": 620.0,
+"confidence": "B",
+"net_price": 613.8,
+"all_in": 629.8,
+"fee_rate": 2.6,
+"status": null
+},
+{
+"course": "信誼",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 615.0,
+"high": 615.0,
+"status": null,
+"raw": "615",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 615.0,
+"high": 615.0,
+"status": null,
+"raw": "615",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 610.0,
+"high": 610.0,
+"status": null,
+"raw": "610",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 605.0,
+"high": 610.0,
+"status": null,
+"raw": "605-610",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 612.5,
+"dispersion": 1.23,
+"lo": 607.5,
+"hi": 615.0,
+"confidence": "A",
+"net_price": 612.5,
+"all_in": 632.5,
+"fee_rate": 3.3,
+"status": null
+},
+{
+"course": "台中國際",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 555.0,
+"high": 560.0,
+"status": null,
+"raw": "555-560",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 560.0,
+"high": 560.0,
+"status": null,
+"raw": "560",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 560.0,
+"high": 560.0,
+"status": null,
+"raw": "560",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 560.0,
+"high": 560.0,
+"status": null,
+"raw": "560",
+"date": null
+}
+},
+"transfer_fee": 2.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 560.0,
+"dispersion": 0.45,
+"lo": 557.5,
+"hi": 560.0,
+"confidence": "A",
+"net_price": 560.0,
+"all_in": 562.0,
+"fee_rate": 0.4,
+"status": null
+},
+{
+"course": "台豐",
+"klass": "股東尊榮",
+"region": "中彰投",
+"n_sources": 1,
+"quotes": {
+"ylgolf": {
+"low": 550.0,
+"high": 560.0,
+"status": null,
+"raw": "550-560",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 58.8,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 555.0,
+"dispersion": 0.0,
+"lo": 555.0,
+"hi": 555.0,
+"confidence": "—",
+"net_price": 555.0,
+"all_in": 613.8,
+"fee_rate": 10.6,
+"status": null
+},
+{
+"course": "揚昇",
+"klass": "眷屬",
+"region": "桃園",
+"n_sources": 2,
+"quotes": {
+"ylgolf": {
+"low": 520.0,
+"high": 530.0,
+"status": null,
+"raw": "520-530",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 520.0,
+"high": 520.0,
+"status": null,
+"raw": "520",
+"date": null
+}
+},
+"transfer_fee": 250.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 19500.0,
+"deposit": null,
+"mid": 522.5,
+"dispersion": 0.96,
+"lo": 520.0,
+"hi": 525.0,
+"confidence": "C",
+"net_price": 522.5,
+"all_in": 772.5,
+"fee_rate": 47.8,
+"status": null
+},
+{
+"course": "台豐",
+"klass": "擊球尊榮",
+"region": "中彰投",
+"n_sources": 1,
+"quotes": {
+"ylgolf": {
+"low": 520.0,
+"high": 520.0,
+"status": null,
+"raw": "520",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 58.8,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 520.0,
+"dispersion": 0.0,
+"lo": 520.0,
+"hi": 520.0,
+"confidence": "—",
+"net_price": 520.0,
+"all_in": 578.8,
+"fee_rate": 11.3,
+"status": null
+},
+{
+"course": "第一",
+"klass": "股東眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 490.0,
+"high": 500.0,
+"status": null,
+"raw": "490-500",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 490.0,
+"high": 490.0,
+"status": null,
+"raw": "490",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 485.0,
+"high": 490.0,
+"status": null,
+"raw": "485-490",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 505.0,
+"high": 505.0,
+"status": null,
+"raw": "505",
+"date": null
+}
+},
+"transfer_fee": 35.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 492.5,
+"dispersion": 3.54,
+"lo": 487.5,
+"hi": 505.0,
+"confidence": "B",
+"net_price": 492.5,
+"all_in": 527.5,
+"fee_rate": 7.1,
+"status": null
+},
+{
+"course": "大屯",
+"klass": "股東眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 445.0,
+"high": 450.0,
+"status": null,
+"raw": "445-450(30保)",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 450.0,
+"high": 450.0,
+"status": null,
+"raw": "450(30保)",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 440.0,
+"high": 440.0,
+"status": null,
+"raw": "440(30保)",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 485.0,
+"high": 485.0,
+"status": null,
+"raw": "485",
+"date": null
+}
+},
+"transfer_fee": 8.625,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": 30.0,
+"mid": 448.8,
+"dispersion": 9.88,
+"lo": 440.0,
+"hi": 485.0,
+"confidence": "C",
+"net_price": 418.8,
+"all_in": 457.4,
+"fee_rate": 1.9,
+"status": null
+},
+{
+"course": "南峰",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 440.0,
+"high": 445.0,
+"status": null,
+"raw": "440-445",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 450.0,
+"high": 450.0,
+"status": null,
+"raw": "450",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 445.0,
+"high": 450.0,
+"status": null,
+"raw": "445-450",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 445.0,
+"high": 450.0,
+"status": null,
+"raw": "445-450",
+"date": null
+}
+},
+"transfer_fee": 10.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 447.5,
+"dispersion": 1.68,
+"lo": 442.5,
+"hi": 450.0,
+"confidence": "A",
+"net_price": 447.5,
+"all_in": 457.5,
+"fee_rate": 2.2,
+"status": null
+},
+{
+"course": "台南(新化)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 440.0,
+"high": 450.0,
+"status": null,
+"raw": "440-450",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 460.0,
+"high": 460.0,
+"status": null,
+"raw": "460",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 440.0,
+"high": 450.0,
+"status": null,
+"raw": "440-450",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 440.0,
+"high": 450.0,
+"status": null,
+"raw": "440-450",
+"date": null
+}
+},
+"transfer_fee": 17.5,
+"transfer_fee_spread": 28.57142857142857,
+"annual_dues": null,
+"deposit": null,
+"mid": 445.0,
+"dispersion": 3.34,
+"lo": 445.0,
+"hi": 460.0,
+"confidence": "B",
+"net_price": 445.0,
+"all_in": 462.5,
+"fee_rate": 3.9,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "個人正式",
+"region": "花東",
+"n_sources": 3,
+"quotes": {
+"huifeng": {
+"low": 435.0,
+"high": 440.0,
+"status": null,
+"raw": "435-440",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 440.0,
+"high": 440.0,
+"status": null,
+"raw": "440",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 480.0,
+"high": 485.0,
+"status": null,
+"raw": "480-485",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 60.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": 440.0,
+"dispersion": 9.93,
+"lo": 437.5,
+"hi": 482.5,
+"confidence": "C",
+"net_price": 440.0,
+"all_in": 500.0,
+"fee_rate": 13.6,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "個人",
+"region": "桃園",
+"n_sources": 1,
+"quotes": {
+"golf168": {
+"low": 440.0,
+"high": 440.0,
+"status": null,
+"raw": "440",
+"date": null
+}
+},
+"transfer_fee": 60.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": 440.0,
+"dispersion": 0.0,
+"lo": 440.0,
+"hi": 440.0,
+"confidence": "—",
+"net_price": 440.0,
+"all_in": 500.0,
+"fee_rate": 13.6,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "眷屬平日",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 400.0,
+"high": 410.0,
+"status": null,
+"raw": "400-410",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 420.0,
+"high": 420.0,
+"status": null,
+"raw": "420",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 410.0,
+"high": 420.0,
+"status": null,
+"raw": "410-420",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 410.0,
+"high": 420.0,
+"status": null,
+"raw": "410-420",
+"date": null
+}
+},
+"transfer_fee": 45.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": 415.0,
+"dispersion": 3.63,
+"lo": 405.0,
+"hi": 420.0,
+"confidence": "B",
+"net_price": 415.0,
+"all_in": 460.0,
+"fee_rate": 10.8,
+"status": null
+},
+{
+"course": "大崗山",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 400.0,
+"high": 410.0,
+"status": null,
+"raw": "400-410",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 420.0,
+"high": 420.0,
+"status": null,
+"raw": "420",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 400.0,
+"high": 410.0,
+"status": null,
+"raw": "400-410",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 400.0,
+"high": 410.0,
+"status": null,
+"raw": "400-410",
+"date": null
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 120.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 405.0,
+"dispersion": 3.67,
+"lo": 405.0,
+"hi": 420.0,
+"confidence": "B",
+"net_price": 405.0,
+"all_in": 420.0,
+"fee_rate": 3.7,
+"status": null
+},
+{
+"course": "豐原",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 395.0,
+"high": 400.0,
+"status": null,
+"raw": "395-400",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 400.0,
+"high": 400.0,
+"status": null,
+"raw": "400",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 400.0,
+"high": 400.0,
+"status": null,
+"raw": "400",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 400.0,
+"high": 400.0,
+"status": null,
+"raw": "400",
+"date": null
+}
+},
+"transfer_fee": 1.1,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 400.0,
+"dispersion": 0.63,
+"lo": 397.5,
+"hi": 400.0,
+"confidence": "A",
+"net_price": 400.0,
+"all_in": 401.1,
+"fee_rate": 0.3,
+"status": null
+},
+{
+"course": "嘉南",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 375.0,
+"high": 380.0,
+"status": null,
+"raw": "375-380",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 390.0,
+"high": 390.0,
+"status": null,
+"raw": "390",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 380.0,
+"high": 380.0,
+"status": null,
+"raw": "380",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 380.0,
+"high": 380.0,
+"status": null,
+"raw": "380",
+"date": null
+}
+},
+"transfer_fee": 11.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 380.0,
+"dispersion": 3.27,
+"lo": 377.5,
+"hi": 390.0,
+"confidence": "B",
+"net_price": 380.0,
+"all_in": 391.0,
+"fee_rate": 2.9,
+"status": null
+},
+{
+"course": "揚昇",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 400.0,
+"high": 400.0,
+"status": null,
+"raw": "400(220保)",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 220.0,
+"high": 400.0,
+"status": null,
+"raw": "350(100保) 400(220保)",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 400.0,
+"high": 400.0,
+"status": null,
+"raw": "400",
+"date": null
+}
+},
+"transfer_fee": 165.0,
+"transfer_fee_spread": 21.21212121212121,
+"annual_dues": 7950.0,
+"deposit": 160.0,
+"mid": 375.0,
+"dispersion": 24.66,
+"lo": 310.0,
+"hi": 400.0,
+"confidence": "C",
+"net_price": 215.0,
+"all_in": 540.0,
+"fee_rate": 44.0,
+"status": null
+},
+{
+"course": "台北",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 365.0,
+"high": 365.0,
+"status": null,
+"raw": "365",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 365.0,
+"high": 365.0,
+"status": null,
+"raw": "365",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 365.0,
+"high": 365.0,
+"status": null,
+"raw": "365",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 370.0,
+"high": 370.0,
+"status": null,
+"raw": "370",
+"date": null
+}
+},
+"transfer_fee": 5.75,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 365.0,
+"dispersion": 1.37,
+"lo": 365.0,
+"hi": 370.0,
+"confidence": "A",
+"net_price": 365.0,
+"all_in": 370.8,
+"fee_rate": 1.6,
+"status": null
+},
+{
+"course": "大屯",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 353.0,
+"high": 355.0,
+"status": null,
+"raw": "353-355",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 360.0,
+"high": 360.0,
+"status": null,
+"raw": "360",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 355.0,
+"high": 355.0,
+"status": null,
+"raw": "355",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 355.0,
+"high": 355.0,
+"status": null,
+"raw": "355",
+"date": null
+}
+},
+"transfer_fee": 5.75,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 355.0,
+"dispersion": 1.69,
+"lo": 354.0,
+"hi": 360.0,
+"confidence": "A",
+"net_price": 355.0,
+"all_in": 360.8,
+"fee_rate": 1.6,
+"status": null
+},
+{
+"course": "龍潭",
+"klass": "個人平日",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 310.0,
+"high": 310.0,
+"status": null,
+"raw": "310",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 340.0,
+"high": 340.0,
+"status": null,
+"raw": "340",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 345.0,
+"high": 345.0,
+"status": null,
+"raw": "345",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 340.0,
+"high": 345.0,
+"status": null,
+"raw": "340-345",
+"date": null
+}
+},
+"transfer_fee": 30.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 3600.0,
+"deposit": null,
+"mid": 341.2,
+"dispersion": 10.47,
+"lo": 310.0,
+"hi": 345.0,
+"confidence": "C",
+"net_price": 341.2,
+"all_in": 371.2,
+"fee_rate": 8.8,
+"status": null
+},
+{
+"course": "清泉崗(CCK)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 340.0,
+"high": 340.0,
+"status": null,
+"raw": "340",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": null
+}
+},
+"transfer_fee": 6.6,
+"transfer_fee_spread": 0.0,
+"annual_dues": 3300.0,
+"deposit": null,
+"mid": 332.5,
+"dispersion": 2.24,
+"lo": 332.5,
+"hi": 340.0,
+"confidence": "B",
+"net_price": 332.5,
+"all_in": 339.1,
+"fee_rate": 2.0,
+"status": null
+},
+{
+"course": "台豐",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 328.0,
+"high": 330.0,
+"status": null,
+"raw": "328-330",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 330.0,
+"high": 330.0,
+"status": null,
+"raw": "330",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": null
+}
+},
+"transfer_fee": 88.2,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 331.2,
+"dispersion": 1.06,
+"lo": 329.0,
+"hi": 332.5,
+"confidence": "A",
+"net_price": 331.2,
+"all_in": 419.4,
+"fee_rate": 26.6,
+"status": null
+},
+{
+"course": "楊梅",
+"klass": "股東眷屬",
+"region": "桃園",
+"n_sources": 1,
+"quotes": {
+"golf168": {
+"low": 330.0,
+"high": 330.0,
+"status": null,
+"raw": "330",
+"date": null
+}
+},
+"transfer_fee": 25.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 330.0,
+"dispersion": 0.0,
+"lo": 330.0,
+"hi": 330.0,
+"confidence": "—",
+"net_price": 330.0,
+"all_in": 355.0,
+"fee_rate": 7.6,
+"status": null
+},
+{
+"course": "楊梅",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 2,
+"quotes": {
+"huifeng": {
+"low": 300.0,
+"high": 305.0,
+"status": null,
+"raw": "300-305",
+"date": "2026-08-17"
+},
+"ylgolf": {
+"low": 330.0,
+"high": 335.0,
+"status": null,
+"raw": "330-335",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 25.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 317.5,
+"dispersion": 9.45,
+"lo": 302.5,
+"hi": 332.5,
+"confidence": "C",
+"net_price": 317.5,
+"all_in": 342.5,
+"fee_rate": 7.9,
+"status": null
+},
+{
+"course": "第一",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 315.0,
+"high": 320.0,
+"status": null,
+"raw": "315-320",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 320.0,
+"high": 320.0,
+"status": null,
+"raw": "320",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 310.0,
+"high": 320.0,
+"status": null,
+"raw": "310-320",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 310.0,
+"high": 315.0,
+"status": null,
+"raw": "310-315",
+"date": null
+}
+},
+"transfer_fee": 35.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 316.2,
+"dispersion": 2.37,
+"lo": 312.5,
+"hi": 320.0,
+"confidence": "B",
+"net_price": 316.2,
+"all_in": 351.2,
+"fee_rate": 11.1,
+"status": null
+},
+{
+"course": "全國",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 278.0,
+"high": 280.0,
+"status": null,
+"raw": "278-280",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 290.0,
+"high": 290.0,
+"status": null,
+"raw": "290",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 285.0,
+"high": 290.0,
+"status": null,
+"raw": "285-290",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 285.0,
+"high": 290.0,
+"status": null,
+"raw": "285-290",
+"date": null
+}
+},
+"transfer_fee": 18.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 287.5,
+"dispersion": 3.85,
+"lo": 279.0,
+"hi": 290.0,
+"confidence": "B",
+"net_price": 287.5,
+"all_in": 305.5,
+"fee_rate": 6.3,
+"status": null
+},
+{
+"course": "旭陽",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 280.0,
+"high": 282.0,
+"status": null,
+"raw": "280-282",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 290.0,
+"high": 290.0,
+"status": null,
+"raw": "290",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 280.0,
+"high": 285.0,
+"status": null,
+"raw": "280-285",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 280.0,
+"high": 285.0,
+"status": null,
+"raw": "280-285",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 12000.0,
+"deposit": null,
+"mid": 282.5,
+"dispersion": 3.17,
+"lo": 281.0,
+"hi": 290.0,
+"confidence": "B",
+"net_price": 282.5,
+"all_in": 302.5,
+"fee_rate": 7.1,
+"status": null
+},
+{
+"course": "南寶",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 280.0,
+"high": 282.0,
+"status": null,
+"raw": "280-282",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 290.0,
+"high": 290.0,
+"status": null,
+"raw": "290",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 280.0,
+"high": 285.0,
+"status": null,
+"raw": "280-285",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 280.0,
+"high": 285.0,
+"status": null,
+"raw": "280-285",
+"date": null
+}
+},
+"transfer_fee": 10.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 282.5,
+"dispersion": 3.17,
+"lo": 281.0,
+"hi": 290.0,
+"confidence": "B",
+"net_price": 282.5,
+"all_in": 292.5,
+"fee_rate": 3.5,
+"status": null
+},
+{
+"course": "松柏嶺(南投)",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 278.0,
+"high": 280.0,
+"status": null,
+"raw": "278-280",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 280.0,
+"high": 280.0,
+"status": null,
+"raw": "280",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 280.0,
+"high": 280.0,
+"status": null,
+"raw": "280",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 280.0,
+"high": 280.0,
+"status": null,
+"raw": "280",
+"date": null
+}
+},
+"transfer_fee": 5.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 280.0,
+"dispersion": 0.36,
+"lo": 279.0,
+"hi": 280.0,
+"confidence": "A",
+"net_price": 280.0,
+"all_in": 285.0,
+"fee_rate": 1.8,
+"status": null
+},
+{
+"course": "山溪地",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 275.0,
+"high": 280.0,
+"status": null,
+"raw": "275-280",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 290.0,
+"high": 290.0,
+"status": null,
+"raw": "290",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 280.0,
+"high": 280.0,
+"status": null,
+"raw": "280",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": null
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 278.8,
+"dispersion": 7.16,
+"lo": 270.0,
+"hi": 290.0,
+"confidence": "C",
+"net_price": 278.8,
+"all_in": 293.8,
+"fee_rate": 5.4,
+"status": null
+},
+{
+"course": "台豐",
+"klass": "擊球權個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 265.0,
+"high": 265.0,
+"status": null,
+"raw": "265",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": null
+}
+},
+"transfer_fee": 88.2,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 270.0,
+"dispersion": 1.86,
+"lo": 265.0,
+"hi": 270.0,
+"confidence": "A",
+"net_price": 270.0,
+"all_in": 358.2,
+"fee_rate": 32.7,
+"status": null
+},
+{
+"course": "立益",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 265.0,
+"high": 270.0,
+"status": null,
+"raw": "265-270",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 240.0,
+"high": 250.0,
+"status": null,
+"raw": "240-250",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 270.0,
+"high": 270.0,
+"status": null,
+"raw": "270",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 268.8,
+"dispersion": 9.5,
+"lo": 245.0,
+"hi": 270.0,
+"confidence": "C",
+"net_price": 268.8,
+"all_in": 288.8,
+"fee_rate": 7.4,
+"status": null
+},
+{
+"course": "幸福",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 250.0,
+"high": 260.0,
+"status": null,
+"raw": "250-260",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 260.0,
+"high": 260.0,
+"status": null,
+"raw": "260",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 285.0,
+"high": 285.0,
+"status": null,
+"raw": "285",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 235.0,
+"high": 235.0,
+"status": null,
+"raw": "235",
+"date": null
+}
+},
+"transfer_fee": 40.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 257.5,
+"dispersion": 19.32,
+"lo": 235.0,
+"hi": 285.0,
+"confidence": "C",
+"net_price": 257.5,
+"all_in": 297.5,
+"fee_rate": 15.5,
+"status": null
+},
+{
+"course": "楊梅",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 245.0,
+"high": 250.0,
+"status": null,
+"raw": "245-250",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 260.0,
+"high": 260.0,
+"status": null,
+"raw": "260",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 255.0,
+"high": 255.0,
+"status": null,
+"raw": "255",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 250.0,
+"high": 250.0,
+"status": null,
+"raw": "250",
+"date": null
+}
+},
+"transfer_fee": 25.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 252.5,
+"dispersion": 4.94,
+"lo": 247.5,
+"hi": 260.0,
+"confidence": "B",
+"net_price": 252.5,
+"all_in": 277.5,
+"fee_rate": 9.9,
+"status": null
+},
+{
+"course": "礁溪",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 242.0,
+"high": 245.0,
+"status": null,
+"raw": "242-245",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 250.0,
+"high": 250.0,
+"status": null,
+"raw": "250",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 243.0,
+"high": 243.0,
+"status": null,
+"raw": "243",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 245.0,
+"high": 245.0,
+"status": null,
+"raw": "245",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 25.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 244.2,
+"dispersion": 2.85,
+"lo": 243.0,
+"hi": 250.0,
+"confidence": "B",
+"net_price": 244.2,
+"all_in": 264.2,
+"fee_rate": 8.2,
+"status": null
+},
+{
+"course": "桃園",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 198.0,
+"high": 200.0,
+"status": null,
+"raw": "198-200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 205.0,
+"high": 205.0,
+"status": null,
+"raw": "205",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 208.0,
+"high": 210.0,
+"status": null,
+"raw": "208-210",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": null
+}
+},
+"transfer_fee": 23.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4200.0,
+"deposit": null,
+"mid": 202.5,
+"dispersion": 4.92,
+"lo": 199.0,
+"hi": 209.0,
+"confidence": "B",
+"net_price": 202.5,
+"all_in": 225.5,
+"fee_rate": 11.4,
+"status": null
+},
+{
+"course": "桃園",
+"klass": "團體",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 198.0,
+"high": 200.0,
+"status": null,
+"raw": "@198-200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 205.0,
+"high": 205.0,
+"status": null,
+"raw": "@205",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 208.0,
+"high": 210.0,
+"status": null,
+"raw": "@208-210",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": null
+}
+},
+"transfer_fee": 23.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4200.0,
+"deposit": null,
+"mid": 202.5,
+"dispersion": 4.92,
+"lo": 199.0,
+"hi": 209.0,
+"confidence": "B",
+"net_price": 202.5,
+"all_in": 225.5,
+"fee_rate": 11.4,
+"status": null
+},
+{
+"course": "幸福",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 195.0,
+"high": 200.0,
+"status": null,
+"raw": "195-200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 200.0,
+"dispersion": 1.25,
+"lo": 197.5,
+"hi": 200.0,
+"confidence": "A",
+"net_price": 200.0,
+"all_in": 220.0,
+"fee_rate": 10.0,
+"status": null
+},
+{
+"course": "山溪地",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 195.0,
+"high": 200.0,
+"status": null,
+"raw": "195-200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 210.0,
+"high": 210.0,
+"status": null,
+"raw": "210",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": null
+}
+},
+"transfer_fee": 12.5,
+"transfer_fee_spread": 40.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 200.0,
+"dispersion": 6.19,
+"lo": 197.5,
+"hi": 210.0,
+"confidence": "C",
+"net_price": 200.0,
+"all_in": 212.5,
+"fee_rate": 6.2,
+"status": null
+},
+{
+"course": "觀音山",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 195.0,
+"high": 200.0,
+"status": null,
+"raw": "195-200",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 200.0,
+"high": 200.0,
+"status": null,
+"raw": "200",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": 200.0,
+"dispersion": 1.25,
+"lo": 197.5,
+"hi": 200.0,
+"confidence": "A",
+"net_price": 200.0,
+"all_in": 220.0,
+"fee_rate": 10.0,
+"status": null
+},
+{
+"course": "老爺關西",
+"klass": "個人",
+"region": "花東",
+"n_sources": 1,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 185.0,
+"high": 185.0,
+"status": null,
+"raw": "185(180保)",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 33.33333333333333,
+"annual_dues": null,
+"deposit": 180.0,
+"mid": 185.0,
+"dispersion": 0.0,
+"lo": 185.0,
+"hi": 185.0,
+"confidence": "—",
+"net_price": 5.0,
+"all_in": 200.0,
+"fee_rate": 8.1,
+"status": null
+},
+{
+"course": "八里國際",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 185.0,
+"high": 190.0,
+"status": null,
+"raw": "185-190",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 160.0,
+"high": 165.0,
+"status": null,
+"raw": "160-165",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 180.0,
+"high": 180.0,
+"status": null,
+"raw": "180(160保)",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 180.0,
+"high": 180.0,
+"status": null,
+"raw": "180",
+"date": null
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": 160.0,
+"mid": 180.0,
+"dispersion": 14.08,
+"lo": 162.5,
+"hi": 187.5,
+"confidence": "C",
+"net_price": 20.0,
+"all_in": 200.0,
+"fee_rate": 11.1,
+"status": null
+},
+{
+"course": "霧峰",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 170.0,
+"high": 172.0,
+"status": null,
+"raw": "170-172",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 176.0,
+"high": 176.0,
+"status": null,
+"raw": "176",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 173.0,
+"high": 175.0,
+"status": null,
+"raw": "173-175",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 170.0,
+"high": 175.0,
+"status": null,
+"raw": "170-175",
+"date": null
+}
+},
+"transfer_fee": 8.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 173.2,
+"dispersion": 2.88,
+"lo": 171.0,
+"hi": 176.0,
+"confidence": "B",
+"net_price": 173.2,
+"all_in": 181.2,
+"fee_rate": 4.6,
+"status": null
+},
+{
+"course": "長安",
+"klass": "團體",
+"region": "花東",
+"n_sources": 1,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止營業",
+"raw": "停止營業",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 120.0,
+"high": 120.0,
+"status": null,
+"raw": "120",
+"date": "2026-08-19"
+}
+},
+"transfer_fee": 50.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 80000.0,
+"deposit": null,
+"mid": 120.0,
+"dispersion": 0.0,
+"lo": 120.0,
+"hi": 120.0,
+"confidence": "—",
+"net_price": 120.0,
+"all_in": 170.0,
+"fee_rate": 41.7,
+"status": null
+},
+{
+"course": "黃金海岸(北海)",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 108.0,
+"high": 110.0,
+"status": null,
+"raw": "108-110",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 110.0,
+"high": 110.0,
+"status": null,
+"raw": "110",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 110.0,
+"high": 112.0,
+"status": null,
+"raw": "110-112",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 110.0,
+"high": 110.0,
+"status": null,
+"raw": "110",
+"date": null
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 8000.0,
+"deposit": null,
+"mid": 110.0,
+"dispersion": 1.82,
+"lo": 109.0,
+"hi": 111.0,
+"confidence": "A",
+"net_price": 110.0,
+"all_in": 125.0,
+"fee_rate": 13.6,
+"status": null
+},
+{
+"course": "東華",
+"klass": "個人",
+"region": "花東",
+"n_sources": 3,
+"quotes": {
+"huifeng": {
+"low": 105.0,
+"high": 107.0,
+"status": null,
+"raw": "105-107",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 110.0,
+"high": 110.0,
+"status": null,
+"raw": "110",
+"date": "2026-08-19"
+},
+"golf168": {
+"low": 105.0,
+"high": 105.0,
+"status": null,
+"raw": "105",
+"date": null
+}
+},
+"transfer_fee": 0.0,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": 106.0,
+"dispersion": 4.67,
+"lo": 105.0,
+"hi": 110.0,
+"confidence": "B",
+"net_price": 106.0,
+"all_in": 106.0,
+"fee_rate": 0.0,
+"status": null
+},
+{
+"course": "黃金海岸(北海)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 74.0,
+"high": 75.0,
+"status": null,
+"raw": "74-75",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 77.0,
+"high": 77.0,
+"status": null,
+"raw": "77",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 75.0,
+"high": 76.0,
+"status": null,
+"raw": "75-76",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 75.0,
+"high": 76.0,
+"status": null,
+"raw": "75-76",
+"date": null
+}
+},
+"transfer_fee": 12.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 5000.0,
+"deposit": null,
+"mid": 75.5,
+"dispersion": 3.31,
+"lo": 74.5,
+"hi": 77.0,
+"confidence": "B",
+"net_price": 75.5,
+"all_in": 87.5,
+"fee_rate": 15.9,
+"status": null
+},
+{
+"course": "濱海",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 64.0,
+"high": 65.0,
+"status": null,
+"raw": "64-65",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 65.0,
+"high": 65.0,
+"status": null,
+"raw": "65",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 66.0,
+"high": 66.0,
+"status": null,
+"raw": "66.",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 65.0,
+"high": 65.0,
+"status": null,
+"raw": "65",
+"date": null
+}
+},
+"transfer_fee": 8.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 65.0,
+"dispersion": 2.3,
+"lo": 64.5,
+"hi": 66.0,
+"confidence": "B",
+"net_price": 65.0,
+"all_in": 73.0,
+"fee_rate": 12.3,
+"status": null
+},
+{
+"course": "統帥",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 47.0,
+"high": 48.0,
+"status": null,
+"raw": "47-48",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 48.0,
+"high": 48.0,
+"status": null,
+"raw": "48",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 49.0,
+"high": 50.0,
+"status": null,
+"raw": "49-50",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 51.0,
+"high": 51.0,
+"status": null,
+"raw": "51",
+"date": null
+}
+},
+"transfer_fee": 8.0,
+"transfer_fee_spread": 25.0,
+"annual_dues": 6000.0,
+"deposit": null,
+"mid": 48.8,
+"dispersion": 7.14,
+"lo": 47.5,
+"hi": 51.0,
+"confidence": "C",
+"net_price": 48.8,
+"all_in": 56.8,
+"fee_rate": 16.4,
+"status": null
+},
+{
+"course": "花蓮",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 44.0,
+"high": 45.0,
+"status": null,
+"raw": "44-45",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 45.0,
+"high": 45.0,
+"status": null,
+"raw": "45",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 45.0,
+"high": 45.0,
+"status": null,
+"raw": "45",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 45.0,
+"high": 45.0,
+"status": null,
+"raw": "45",
+"date": null
+}
+},
+"transfer_fee": 5.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 10000.0,
+"deposit": null,
+"mid": 45.0,
+"dispersion": 1.11,
+"lo": 44.5,
+"hi": 45.0,
+"confidence": "A",
+"net_price": 45.0,
+"all_in": 50.0,
+"fee_rate": 11.1,
+"status": null
+},
+{
+"course": "斑芝花(永安)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 41.0,
+"high": 42.0,
+"status": null,
+"raw": "41-42",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 41.0,
+"high": 41.0,
+"status": null,
+"raw": "41",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 42.0,
+"high": 43.0,
+"status": null,
+"raw": "42-43",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 42.0,
+"high": 43.0,
+"status": null,
+"raw": "42-43",
+"date": null
+}
+},
+"transfer_fee": 1.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 42.0,
+"dispersion": 3.58,
+"lo": 41.0,
+"hi": 42.5,
+"confidence": "B",
+"net_price": 42.0,
+"all_in": 43.0,
+"fee_rate": 2.4,
+"status": null
+},
+{
+"course": "皇家",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 40.0,
+"high": 41.0,
+"status": null,
+"raw": "40-41",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 40.0,
+"high": 40.0,
+"status": null,
+"raw": "40",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 41.0,
+"high": 41.0,
+"status": null,
+"raw": "41",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 41.0,
+"high": 41.0,
+"status": null,
+"raw": "41",
+"date": null
+}
+},
+"transfer_fee": 8.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 40.8,
+"dispersion": 2.46,
+"lo": 40.0,
+"hi": 41.0,
+"confidence": "B",
+"net_price": 40.8,
+"all_in": 48.8,
+"fee_rate": 19.6,
+"status": null
+},
+{
+"course": "統帥",
+"klass": "個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 33.0,
+"high": 34.0,
+"status": null,
+"raw": "33-34",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 33.0,
+"high": 33.0,
+"status": null,
+"raw": "33",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 34.0,
+"high": 34.0,
+"status": null,
+"raw": "34",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 34.0,
+"high": 34.0,
+"status": null,
+"raw": "34",
+"date": null
+}
+},
+"transfer_fee": 8.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": 33.8,
+"dispersion": 2.97,
+"lo": 33.0,
+"hi": 34.0,
+"confidence": "B",
+"net_price": 33.8,
+"all_in": 41.8,
+"fee_rate": 23.7,
+"status": null
+},
+{
+"course": "翡翠",
+"klass": "個人",
+"region": "花東",
+"n_sources": 2,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "暫停過戶",
+"raw": "暫停過戶",
+"date": "2026-08-17"
+},
+"ylgolf": {
+"low": 6.0,
+"high": 7.0,
+"status": null,
+"raw": "6-7",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 7.0,
+"high": 7.0,
+"status": null,
+"raw": "7",
+"date": null
+}
+},
+"transfer_fee": 10.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 6.8,
+"dispersion": 7.41,
+"lo": 6.5,
+"hi": 7.0,
+"confidence": "C",
+"net_price": 6.8,
+"all_in": 16.8,
+"fee_rate": 148.1,
+"status": null
+},
+{
+"course": "嘉光",
+"klass": "股東個人",
+"region": "花東",
+"n_sources": 4,
+"quotes": {
+"huifeng": {
+"low": 6.0,
+"high": 7.0,
+"status": null,
+"raw": "6-7",
+"date": "2026-08-17"
+},
+"godao": {
+"low": 6.0,
+"high": 6.0,
+"status": null,
+"raw": "6",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": 6.0,
+"high": 6.0,
+"status": null,
+"raw": "6",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": 6.0,
+"high": 6.0,
+"status": null,
+"raw": "6",
+"date": null
+}
+},
+"transfer_fee": 2.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 6.0,
+"dispersion": 8.16,
+"lo": 6.0,
+"hi": 6.5,
+"confidence": "C",
+"net_price": 6.0,
+"all_in": 8.0,
+"fee_rate": 33.3,
+"status": null
+},
+{
+"course": "翡翠.",
+"klass": "個人",
+"region": "花東",
+"n_sources": 1,
+"quotes": {
+"godao": {
+"low": 6.0,
+"high": 6.0,
+"status": null,
+"raw": "6",
+"date": "2026-08-19"
+}
+},
+"transfer_fee": 10.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": 6.0,
+"dispersion": 0.0,
+"lo": 6.0,
+"hi": 6.0,
+"confidence": "—",
+"net_price": 6.0,
+"all_in": 16.0,
+"fee_rate": 166.7,
+"status": null
+},
+{
+"course": "揮皇(新淡水)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "暫停過戶",
+"raw": "暫停過戶",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "暫停過戶",
+"raw": "暫停過戶",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "停止過戶",
+"raw": "停止過戶",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 12.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4976.0,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "暫停過戶"
+},
+{
+"course": "統帥",
+"klass": "團體",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "詢價"
+},
+{
+"course": "藍鷹",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止營業",
+"raw": "停止營業",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "暫停營業",
+"raw": "暫停營業",
+"date": "2026-08-19"
+}
+},
+"transfer_fee": 18.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止營業"
+},
+{
+"course": "長安",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止營業",
+"raw": "停止營業",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "暫停營業",
+"raw": "暫停營業",
+"date": "2026-08-19"
+},
+"golf168": {
+"low": null,
+"high": null,
+"status": "停止營業",
+"raw": "111年11月10日起 停止營業",
+"date": null
+}
+},
+"transfer_fee": 10.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 10000.0,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止營業"
+},
+{
+"course": "東方日星",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止交易"
+},
+{
+"course": "東方日星",
+"klass": "團體",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止交易"
+},
+{
+"course": "東方日星",
+"klass": "團體平日",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止交易"
+},
+{
+"course": "興農",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "結束營業",
+"raw": "結束營業",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "停止營業",
+"raw": "停止營業",
+"date": "2026-08-19"
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "結束營業"
+},
+{
+"course": "棕梠湖(東洋)",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": null
+}
+},
+"transfer_fee": 12.0,
+"transfer_fee_spread": 16.666666666666664,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "詢價"
+},
+{
+"course": "信誼",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": null
+}
+},
+"transfer_fee": 30.0,
+"transfer_fee_spread": 23.333333333333332,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "詢價"
+},
+{
+"course": "山湖觀",
+"klass": "個人",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"huifeng": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-17"
+},
+"godao": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-19"
+},
+"ylgolf": {
+"low": null,
+"high": null,
+"status": "停止交易",
+"raw": "停止交易",
+"date": "2026-08-26"
+},
+"golf168": {
+"low": null,
+"high": null,
+"status": "停止過戶",
+"raw": "停止過戶",
+"date": null
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止交易"
+},
+{
+"course": "藍鷹",
+"klass": "眷屬",
+"region": "花東",
+"n_sources": 0,
+"quotes": {
+"godao": {
+"low": null,
+"high": null,
+"status": "暫停營業",
+"raw": "暫停營業",
+"date": "2026-08-19"
+}
+},
+"transfer_fee": 20.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": 4800.0,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "暫停營業"
+},
+{
+"course": "個人",
+"klass": "105",
+"region": "台北新北",
+"n_sources": 1,
+"quotes": {
+"ylgolf": {
+"low": 0.0,
+"high": 0.0,
+"status": null,
+"raw": "0萬",
+"date": "2026-08-26"
+}
+},
+"transfer_fee": null,
+"transfer_fee_spread": 0,
+"annual_dues": null,
+"deposit": null,
+"mid": 0.0,
+"dispersion": 0.0,
+"lo": 0.0,
+"hi": 0.0,
+"confidence": "—",
+"net_price": 0.0,
+"all_in": 0.0,
+"fee_rate": null,
+"status": null
+},
+{
+"course": "大屯",
+"klass": "揮皇(新淡水)",
+"region": "台北新北",
+"n_sources": 0,
+"quotes": {
+"golf168": {
+"low": null,
+"high": null,
+"status": "停止過戶",
+"raw": "停止過戶",
+"date": null
+}
+},
+"transfer_fee": 1.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "停止過戶"
+},
+{
+"course": "老爺",
+"klass": "個人",
+"region": "竹苗",
+"n_sources": 0,
+"quotes": {
+"golf168": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": null
+}
+},
+"transfer_fee": 15.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "詢價"
+},
+{
+"course": "花蓮",
+"klass": "擊球個人",
+"region": "嘉南高屏",
+"n_sources": 0,
+"quotes": {
+"golf168": {
+"low": null,
+"high": null,
+"status": "詢價",
+"raw": "詢價",
+"date": null
+}
+},
+"transfer_fee": 5.0,
+"transfer_fee_spread": 0.0,
+"annual_dues": null,
+"deposit": null,
+"mid": null,
+"dispersion": null,
+"confidence": "—",
+"status": "詢價"
+}
+]

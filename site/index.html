@@ -1,0 +1,1173 @@
+<title>球證行情所</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F7F8F6; --surface:#FFFFFF; --panel:#EDF0EC; --panel-2:#E3E8E4;
+  --rule:#D5DCD6; --rule-soft:#E4EAE5;
+  --ink:#16201A; --ink-2:#46524A; --ink-3:#727E76;
+  --accent:#2E7D4F; --accent-deep:#1F5C3D; --accent-wash:#E6F0EA;
+  --up:#1F5C3D; --down:#A8321E; --amber:#8A5514;
+  --grid:#E4EAE5;
+  --c0:#2E7D4F; --c1:#C97A16; --c2:#3563A8; --c3:#A8327C;
+  --serif:"Noto Serif TC",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono","SF Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
+  --rule:#2F3830; --rule-soft:#242B26;
+  --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
+  --accent:#4FA97A; --accent-deep:#68BE8F; --accent-wash:#1B2A21;
+  --up:#68BE8F; --down:#E0736B; --amber:#D2971F; --grid:#252D27;
+  --c0:#3D9C71; --c1:#B87F1E; --c2:#5F82D0; --c3:#C25E99;
+}}
+:root[data-theme="dark"]{
+  --paper:#111512; --surface:#171B18; --panel:#1D231F; --panel-2:#242B26;
+  --rule:#2F3830; --rule-soft:#242B26;
+  --ink:#E9EEE9; --ink-2:#B0BBB2; --ink-3:#7F8B82;
+  --accent:#4FA97A; --accent-deep:#68BE8F; --accent-wash:#1B2A21;
+  --up:#68BE8F; --down:#E0736B; --amber:#D2971F; --grid:#252D27;
+  --c0:#3D9C71; --c1:#B87F1E; --c2:#5F82D0; --c3:#C25E99;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;
+  line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1220px;margin:0 auto;padding:0 24px}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---- top bar ---- */
+.top{background:var(--surface);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:30}
+.top .wrap{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.brand{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:.01em;white-space:nowrap}
+.tick{display:flex;align-items:baseline;gap:9px;font-family:var(--mono);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.tick .lab{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.tick .v{font-size:20px;font-weight:600;color:var(--accent-deep)}
+.tick .d{font-size:12.5px;color:var(--up)}
+.tabs{margin-left:auto;display:flex;gap:2px;flex-wrap:wrap}
+.tabs button{background:none;border:0;border-radius:3px;padding:6px 12px;font-size:13.5px;color:var(--ink-3)}
+.tabs button:hover{color:var(--ink);background:var(--panel)}
+.tabs button[aria-selected="true"]{background:var(--accent-wash);color:var(--accent-deep);font-weight:500}
+
+main{padding:28px 0 90px}
+.view[hidden]{display:none}
+section{margin:0 0 34px}
+h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px}
+.sec-note{color:var(--ink-3);font-size:13.5px;margin:0 0 16px;max-width:74ch;line-height:1.65}
+h3{font-size:15.5px;font-weight:700;margin:0 0 10px;letter-spacing:.01em}
+/* 頁面層級的區塊標題：襯線、加上分隔線，並確保永遠疊在吸附表頭之上 */
+.subhead{font-family:var(--serif);font-size:18px;font-weight:600;
+  margin:32px 0 10px;padding-top:18px;border-top:1px solid var(--rule);
+  position:relative;z-index:4;background:var(--paper)}
+.drawer h3:not(.dh){margin-top:22px;padding-top:14px;border-top:1px solid var(--rule-soft)}
+.drawer h3.dh{margin-top:0;padding-top:0;border-top:0}
+
+/* ---- panels ---- */
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:5px}
+.pad{padding:20px 22px}
+
+/* ---- stat tiles ---- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:5px;overflow:hidden;margin:16px 0 0}
+.tile{background:var(--surface);padding:15px 17px 17px}
+.tile .v{font-family:var(--mono);font-size:23px;font-weight:600;line-height:1.2;
+  font-variant-numeric:tabular-nums;display:block;color:var(--accent-deep)}
+.tile .v.neg{color:var(--down)}
+.tile .k{font-size:12px;color:var(--ink-3);margin-top:5px;line-height:1.5}
+
+/* ---- chart ---- */
+.chartbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.seg button{background:var(--surface);border:0;padding:4px 11px;font-size:12px;color:var(--ink-3);
+  border-right:1px solid var(--rule)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent-wash);color:var(--accent-deep);font-weight:500}
+.chartwrap{position:relative}
+svg.chart{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--rule);
+  border-radius:4px;padding:7px 11px;font-family:var(--mono);font-size:11.5px;line-height:1.7;
+  box-shadow:0 4px 14px rgba(0,0,0,.10);white-space:nowrap;z-index:5}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0 0;font-size:12px;color:var(--ink-2)}
+.legend i{display:inline-block;width:13px;height:2.5px;border-radius:2px;margin-right:6px;
+  vertical-align:middle}
+
+/* ---- tables ---- */
+.scroller{overflow-x:auto;border:1px solid var(--rule);border-radius:5px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:760px}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
+thead th{background:var(--panel);font-family:var(--mono);font-weight:500;
+  font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px solid var(--rule);z-index:2}
+thead th.sortable{cursor:pointer;user-select:none}
+thead th.sortable:hover{color:var(--accent-deep)}
+thead th .ar{opacity:.45;font-size:9px}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--accent-wash)}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+td.name{font-weight:500}
+td.name small{color:var(--ink-3);font-weight:400;margin-left:6px;font-size:11.5px}
+.up{color:var(--up)}.down{color:var(--down)}.mute{color:var(--ink-3)}
+.spark{display:block}
+.badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;border:1px solid currentColor;
+  border-radius:99px;padding:0 6px;line-height:1.7;display:inline-block}
+.bA{color:var(--accent-deep)}.bB{color:var(--amber)}.bC{color:var(--down)}.bX{color:var(--ink-3)}
+
+/* ---- course browser ---- */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.chip{background:var(--surface);border:1px solid var(--rule);border-radius:99px;
+  padding:5px 14px;font-size:13px;color:var(--ink-2)}
+.chip:hover{border-color:var(--accent);color:var(--accent-deep)}
+.chip[aria-pressed="true"]{background:var(--accent-wash);border-color:var(--accent);
+  color:var(--accent-deep);font-weight:500}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:8px;margin:0 0 22px}
+.cbtn{background:var(--surface);border:1px solid var(--rule);border-radius:5px;
+  padding:11px 13px;text-align:left;display:flex;flex-direction:column;gap:3px}
+.cbtn:hover{border-color:var(--accent)}
+.cbtn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-wash)}
+.cbtn .cn{font-weight:500;font-size:14px}
+.cbtn .cm{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  display:flex;justify-content:space-between;gap:8px;font-variant-numeric:tabular-nums}
+.cbtn .st{font-size:10.5px;font-family:var(--mono);letter-spacing:.06em}
+.st.on{color:var(--accent-deep)} .st.off{color:var(--down)} .st.hold{color:var(--amber)}
+.slegend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 0;font-size:12px}
+.slegend button{background:none;border:0;padding:2px 0;color:var(--ink-2);display:flex;
+  align-items:center;gap:6px;font-size:12px}
+.slegend button[aria-pressed="false"]{opacity:.38;text-decoration:line-through}
+.slegend i{width:14px;height:2.5px;border-radius:2px;display:inline-block}
+.s0{background:var(--c0)}.s1{background:var(--c1)}.s2{background:var(--c2)}.s3{background:var(--c3)}
+
+/* ---- asia ---- */
+.acards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin:18px 0}
+.acard{background:var(--surface);border:1px solid var(--rule);border-radius:5px;padding:18px 20px}
+.acard h3{font-family:var(--serif);font-size:18px;font-weight:600;margin:0 0 2px}
+.acard .flag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 12px}
+.acard dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12.5px;margin:0 0 12px}
+.acard dt{color:var(--ink-3);white-space:nowrap}
+.acard dd{margin:0;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.acard p{font-size:13px;color:var(--ink-2);margin:0;line-height:1.7}
+.verdict{font-size:12px;margin-top:12px;padding-top:11px;border-top:1px solid var(--rule-soft)}
+.verdict b{color:var(--ink)}
+
+/* ---- filters ---- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+input[type=search],select,input[type=number]{font-family:inherit;font-size:13px;color:var(--ink);
+  background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:6px 10px}
+input[type=search]{min-width:190px}
+label.fld{display:inline-flex;flex-direction:column;gap:4px;font-size:11px;color:var(--ink-3);
+  font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+
+/* ---- drawer ---- */
+.scrim{position:fixed;inset:0;background:rgba(10,16,12,.42);z-index:40}
+.scrim[hidden]{display:none}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);
+  border-left:1px solid var(--rule);z-index:41;overflow-y:auto;padding:22px 24px 60px}
+.drawer[hidden]{display:none}
+.drawer .x{position:absolute;top:14px;right:16px;background:none;border:0;font-size:20px;
+  color:var(--ink-3);line-height:1;padding:4px 8px}
+.dh{font-family:var(--serif);font-size:23px;font-weight:600;margin:0 0 2px;padding-right:40px}
+.dsub{font-size:12.5px;color:var(--ink-3);margin:0 0 16px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 16px;font-size:13px;margin:0 0 18px}
+.kv dt{color:var(--ink-3);white-space:nowrap}
+.kv dd{margin:0;font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+
+/* ---- calculator ---- */
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:14px;margin:0 0 18px}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:5px;overflow:hidden}
+.out div{background:var(--panel);padding:14px 16px}
+.out .v{font-family:var(--mono);font-size:20px;font-weight:600;display:block;
+  font-variant-numeric:tabular-nums;color:var(--accent-deep)}
+.out .v.neg{color:var(--down)}
+.out .k{font-size:11.5px;color:var(--ink-3);margin-top:4px}
+
+.note{background:var(--panel);border-radius:4px;padding:14px 18px;font-size:13px;
+  color:var(--ink-2);line-height:1.7;margin:16px 0}
+.note b{color:var(--ink)}
+footer{border-top:1px solid var(--rule);background:var(--surface);margin-top:40px}
+footer .wrap{padding:26px 24px 50px;font-size:12.5px;color:var(--ink-3);line-height:1.8}
+svg text.g-lbl{fill:var(--ink-3);font-family:var(--mono);font-size:11px}
+svg line.g-grid{stroke:var(--grid);stroke-width:1}
+svg path.g-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg path.g-area{fill:var(--accent);opacity:.13;stroke:none}
+svg circle.g-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+svg path.g-line.l0{stroke:var(--c0)}svg path.g-line.l1{stroke:var(--c1)}
+svg path.g-line.l2{stroke:var(--c2)}svg path.g-line.l3{stroke:var(--c3)}
+svg circle.g-dot.d0{fill:var(--c0)}svg circle.g-dot.d1{fill:var(--c1)}
+svg circle.g-dot.d2{fill:var(--c2)}svg circle.g-dot.d3{fill:var(--c3)}
+svg line.g-cross{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3}
+svg polyline.sp-up{fill:none;stroke:var(--up);stroke-width:1.5;stroke-linejoin:round}
+svg polyline.sp-dn{fill:none;stroke:var(--down);stroke-width:1.5;stroke-linejoin:round}
+svg path.d-line{fill:none;stroke:var(--accent);stroke-width:1.8}
+
+/* ============ RWD ============ */
+/* 表格的次要欄位在窄螢幕收起，避免每張表都變成長距離橫向捲動 */
+@media (max-width:820px){
+  .wrap{padding:0 15px}
+  .top .wrap{gap:10px 14px;padding-top:9px;padding-bottom:9px}
+  .brand{font-size:17px}
+  .tick .v{font-size:17px}
+  .tick .d{font-size:11.5px}
+  .tabs{margin-left:0;width:100%;overflow-x:auto;flex-wrap:nowrap;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:0 0 auto;padding:6px 10px;font-size:13px}
+  h2{font-size:19px}
+  .sec-note{font-size:12.5px}
+  .pad{padding:15px 14px}
+  .tile{padding:12px 13px 14px}
+  .tile .v{font-size:19px}
+  .tile .k{font-size:11px}
+  .tiles{grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+  .drawer{padding:18px 16px 50px}
+  .dh{font-size:20px}
+  .out .v{font-size:17px}
+  .acard{padding:15px 16px}
+  .cgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}
+  .cbtn{padding:9px 11px}
+  th,td{padding:7px 9px}
+  table{font-size:12.5px;min-width:0}
+  .opt{display:none}
+}
+@media (max-width:560px){
+  .opt2{display:none}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .calc{grid-template-columns:1fr 1fr}
+  .filters{gap:7px}
+  input[type=search]{min-width:0;flex:1 1 100%}
+  .acard dl{font-size:12px}
+}
+/* 表單元件不得撐破容器 */
+label.fld{min-width:0}
+label.fld select,label.fld input{width:100%;max-width:100%}
+select{max-width:100%}
+/* 表頭吸附高度改由 JS 量測，避免頁首換行後被遮住 */
+/* 僅長表格需要吸附表頭；短表格吸附會遮住其後的區塊標題 */
+#tbl thead th,#yTbl thead th{position:sticky;top:var(--topH,53px);z-index:2}
+/* 大表格保留橫向捲動，但小表格不要被 min-width 綁死 */
+table.narrow{min-width:0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <span class="brand">球證行情所</span>
+    <span class="tick"><span class="lab">TGMI</span><span class="v" id="tkV">—</span>
+      <span class="d" id="tkD"></span></span>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-v="idx" aria-selected="true">指數</button>
+      <button role="tab" data-v="rank">排行</button>
+      <button role="tab" data-v="course">球場走勢</button>
+      <button role="tab" data-v="year">年度查詢</button>
+      <button role="tab" data-v="list">標的清單</button>
+      <button role="tab" data-v="fee">擊球費</button>
+      <button role="tab" data-v="calc">損益兩平</button>
+      <button role="tab" data-v="asia">亞洲比較</button>
+      <button role="tab" data-v="qa">資料品質</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============ 指數 ============ -->
+<div class="view" id="v-idx">
+  <section>
+    <h2>TGMI 台灣高爾夫球證指數</h2>
+    <p class="sec-note">等權重、鏈式連接（chain-linked），基期 1987 年 1 月 = 100。涵蓋球場數由 1987 年約 10 檔成長至今約 70 檔，故每期僅比較同時存在於前後兩期的標的，避免成分變動污染。資料來源為悅來高爾夫歷年行情表（單一來源重建，未經交叉驗證）。</p>
+    <div class="card pad">
+      <div class="chartbar">
+        <div class="seg" id="scopeSeg"></div>
+        <div class="seg" id="scaleSeg">
+          <button data-s="log" aria-pressed="true">對數</button>
+          <button data-s="lin" aria-pressed="false">線性</button>
+        </div>
+        <div class="seg" id="rangeSeg">
+          <button data-r="all" aria-pressed="true">全期</button>
+          <button data-r="20" aria-pressed="false">20 年</button>
+          <button data-r="10" aria-pressed="false">10 年</button>
+          <button data-r="5" aria-pressed="false">5 年</button>
+        </div>
+      </div>
+      <div class="chartwrap" id="idxWrap"><svg class="chart" id="idxChart"></svg></div>
+      <div class="legend" id="idxLegend"></div>
+    </div>
+    <div class="tiles" id="idxTiles"></div>
+    <div class="note" id="idxStory"></div>
+  </section>
+</div>
+
+<!-- ============ 排行 ============ -->
+<div class="view" id="v-rank" hidden>
+  <section>
+    <h2>排行</h2>
+    <p class="sec-note">漲跌幅以各標的自身的月度序列計算，非跨標的比較。過戶費率＝過戶費 ÷ 共識價，衡量取得成本的摩擦。</p>
+    <div class="note" style="margin:0 0 18px"><b>「最容易靠打球回本」是怎麼算的。</b>
+      <span style="font-family:var(--mono);display:block;margin:8px 0;font-size:12.5px;line-height:1.9">
+      總取得成本 ＝ (共識價 ＋ 過戶費) × 10,000<br>
+      年持有成本 ＝ 總取得成本 × 2.5% ＋ 年費（年化）<br>
+      損益兩平場次 ＝ 年持有成本 ÷ 假日價差</span>
+      例：統帥個人證 33.8 萬 ＋ 過戶費 8 萬 ＝ 41.8 萬；資金成本 418,000 × 2.5% ＝ 10,450 元，
+      加年費 4,800 元 ＝ 15,250 元；除以假日價差 2,180 元 ＝ <b>每年 7.0 場</b>打平。
+      <br><br><b>四個必須知道的假設。</b>
+      ①資金成本固定用 2.5%，這是排行榜的設定值——想改成自己的機會成本請用「損益兩平」分頁。
+      ②此模型把球證當成可回收的本金，只算機會成本，<b>不計價格漲跌</b>。
+      ③過戶費被計入本金一起算機會成本，但它實際上是拿不回來的沉沒成本，
+      因此高過戶費球場（翡翠 154%、揚昇 41%、台豐 27%）的真實成本被低估。
+      ④排行榜假設<b>全部打假日</b>，是對持證最有利的情境。</div>
+    <div id="rankGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px"></div>
+  </section>
+</div>
+
+<!-- ============ 清單 ============ -->
+<div class="view" id="v-list" hidden>
+  <section>
+    <h2>標的清單</h2>
+    <p class="sec-note">共識價取四家仲介報價的中位數。點任一列可展開單檔明細與四來源原始報價。信心等級：A ＝ 3 家以上且極差 ≤2%；B ＝ 3 家以上且極差 ≤5%；C ＝ 僅 2 家或極差 &gt;5%。</p>
+    <div class="filters">
+      <input type="search" id="q" placeholder="搜尋球場…" aria-label="搜尋球場">
+      <select id="fReg"><option value="">全部區域</option></select>
+      <select id="fConf"><option value="">全部信心等級</option><option>A</option><option>B</option><option>C</option></select>
+      <span class="mute" style="font-size:12.5px" id="cnt"></span>
+    </div>
+    <div class="scroller"><table id="tbl">
+      <thead><tr>
+        <th class="sortable" data-k="course">球場 · 類別</th>
+        <th class="opt2">近 10 年走勢</th>
+        <th class="n sortable" data-k="mid">共識價<br>萬元</th>
+        <th class="n sortable" data-k="cagr_1y">近 1 年</th>
+        <th class="n sortable" data-k="cagr_5y">近 5 年<br>年化</th>
+        <th class="n sortable opt" data-k="mdd">最大<br>回撤</th>
+        <th class="n sortable opt" data-k="fee_rate">過戶<br>費率</th>
+        <th class="n sortable opt2" data-k="gapwe">假日<br>價差</th>
+        <th class="n sortable opt" data-k="be">兩平<br>場次/年</th>
+        <th class="n sortable opt2" data-k="dispersion">四源<br>極差</th>
+        <th>信心</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+</div>
+
+
+<!-- ============ 擊球費 ============ -->
+<div class="view" id="v-fee" hidden>
+  <section>
+    <h2>擊球費：有證與無證</h2>
+    <p class="sec-note">同一座球場、同一個開球時段，持證與不持證要付的錢。四格價格皆取四家仲介收費表的中位數。<b>擊球費的跨源分歧遠大於球證報價</b>——來賓假日價的極差率中位數約 24%（球證報價為 3.0%），因此此頁數字應視為量級參考，實際收費以球場公告為準。</p>
+
+    <div class="card pad" style="margin-bottom:18px">
+      <h3>一年打球總支出比較</h3>
+      <p class="sec-note" style="margin-bottom:12px">只計擊球費，不含買證的資金成本與年費。想把買證成本一起算進來，請用「損益兩平」分頁。</p>
+      <div class="calc">
+        <label class="fld">年打球場次<input type="number" id="fRounds" value="30" min="1" max="300"></label>
+        <label class="fld">其中假日比例 %<input type="number" id="fWe" value="60" min="0" max="100"></label>
+        <label class="fld">區域<select id="fReg2"><option value="">全部</option></select></label>
+        <label class="fld">排序<select id="fSort">
+          <option value="gap_we">假日價差</option>
+          <option value="save">年支出差距</option>
+          <option value="gwe">來賓假日價</option>
+          <option value="mwe">會員假日價</option>
+          <option value="course">球場名稱</option>
+        </select></label>
+      </div>
+      <div class="out" id="fOut"></div>
+    </div>
+
+    <div class="scroller"><table id="fTbl"><thead>
+      <tr>
+        <th rowspan="2">球場</th>
+        <th class="opt" rowspan="2">區域</th>
+        <th class="n" colspan="2">有證（會員）</th>
+        <th class="n" colspan="2">無證（來賓）</th>
+        <th class="n" colspan="2">價差</th>
+        <th class="n" rowspan="2">一年<br>省下</th>
+        <th class="opt2" rowspan="2">來源</th>
+      </tr>
+      <tr>
+        <th class="n">平日</th><th class="n">假日</th>
+        <th class="n">平日</th><th class="n">假日</th>
+        <th class="n">平日</th><th class="n">假日</th>
+      </tr></thead><tbody></tbody></table></div>
+    <div class="note" id="fNote"></div>
+  </section>
+</div>
+
+<!-- ============ 試算 ============ -->
+<div class="view" id="v-calc" hidden>
+  <section>
+    <h2>損益兩平試算</h2>
+    <p class="sec-note">把球證當成一項會配息的資產：每年因會員身分省下的擊球費，就是它的配息。此處只計算「使用價值」是否足以覆蓋持有成本，不含資本利得。</p>
+    <div class="card pad">
+      <div class="calc">
+        <label class="fld">標的<select id="cSel"></select></label>
+        <label class="fld">年打球場次<input type="number" id="cRounds" value="30" min="0" max="300"></label>
+        <label class="fld">其中假日比例 %<input type="number" id="cWe" value="60" min="0" max="100"></label>
+        <label class="fld">資金成本 %<input type="number" id="cCoc" value="2.5" min="0" max="20" step="0.1"></label>
+      </div>
+      <div class="out" id="cOut"></div>
+      <div class="note" id="cNote"></div>
+    </div>
+  </section>
+</div>
+
+
+<!-- ============ 球場走勢 ============ -->
+<div class="view" id="v-course" hidden>
+  <section>
+    <h2>球場走勢</h2>
+    <p class="sec-note">先選區域，再選球場。同一座球場的不同會員類別分開繪製——個人證與眷屬證的走勢常有明顯落差。已停業或停止交易的球場一併保留，其歷史正是這個市場最有參考價值的部分。</p>
+    <div class="chips" id="regChips"></div>
+    <div class="cgrid" id="courseGrid"></div>
+    <div id="coursePanel"></div>
+  </section>
+</div>
+
+<!-- ============ 年度查詢 ============ -->
+<div class="view" id="v-year" hidden>
+  <section>
+    <h2>年度查詢</h2>
+    <p class="sec-note">選定年度後，列出當年有報價的所有標的：年初價、年末價、當年最高與最低、以及相對前一年年末的變動。年末價取該年最後一個有數值的月份。</p>
+    <div class="filters">
+      <label class="fld">年度<select id="ySel"></select></label>
+      <label class="fld">區域<select id="yReg"><option value="">全部</option></select></label>
+      <span class="mute" style="font-size:12.5px;align-self:flex-end;padding-bottom:7px" id="yCnt"></span>
+    </div>
+    <div class="scroller"><table id="yTbl"><thead><tr>
+      <th class="sortable" data-yk="course">球場 · 類別</th>
+      <th class="opt">區域</th>
+      <th class="n sortable" data-yk="jan">年初<br>萬元</th>
+      <th class="n sortable" data-yk="dec">年末<br>萬元</th>
+      <th class="n sortable opt" data-yk="lo">當年最低</th>
+      <th class="n sortable opt" data-yk="hi">當年最高</th>
+      <th class="n sortable opt2" data-yk="avg">均價</th>
+      <th class="n sortable" data-yk="yoy">年變動</th>
+      <th class="n opt2">月數</th>
+    </tr></thead><tbody></tbody></table></div>
+    <div class="note" id="yNote"></div>
+  </section>
+</div>
+
+<!-- ============ 亞洲比較 ============ -->
+<div class="view" id="v-asia" hidden>
+  <section>
+    <h2>亞洲球證制度比較</h2>
+    <p class="sec-note">台灣不是唯一有球證次級市場的國家，但各國的法律性質差異極大，直接比較價格會產生誤導。以下依「這張證到底是什麼」分類，資料查證於 2026 年 9 月。</p>
+    <div class="scroller"><table id="asiaTbl"><thead><tr>
+      <th>國家</th><th>法律性質</th><th>次級市場</th><th>頂級標的價位</th>
+      <th>持有成本</th><th>當前趨勢</th><th>投資可行性</th></tr></thead><tbody></tbody></table></div>
+    <div class="acards" id="asiaCards"></div>
+    <div class="note" id="asiaNote"></div>
+  </section>
+</div>
+
+<!-- ============ 品質 ============ -->
+<div class="view" id="v-qa" hidden>
+  <section>
+    <h2>資料品質</h2>
+    <p class="sec-note">本站的立場是：給一個數字，同時給這個數字有多可信。以下為管線實際產出的稽核紀錄。</p>
+    <div class="tiles" id="qaTiles"></div>
+    <h3 class="subhead">四來源報價分歧最大的標的</h3>
+    <p class="sec-note">同一天、同一張證，四家仲介各自掛出的價格。共識價取中位數而非平均，正是為了不被單一家的陳舊報價拉走。</p>
+    <div class="scroller"><table id="qaDisp"><thead><tr>
+      <th>標的</th><th class="n">惠豐<br>08/17</th><th class="n">公道<br>08/19</th>
+      <th class="n">悅來<br>08/26</th><th class="n">golf168<br>未標日</th>
+      <th class="n">共識</th><th class="n">極差</th></tr></thead><tbody></tbody></table></div>
+    <h3 class="subhead">已修正的來源錯字</h3>
+    <p class="sec-note">偵測規則：單月價格出現 &gt;30% 跳動、次月又立即以相反方向回復，判定為來源表格打字錯誤，以前後月幾何平均取代。每一筆修正均留存原值。</p>
+    <div class="scroller"><table id="qaFix"><thead><tr>
+      <th>標的</th><th>月份</th><th class="n">原值</th><th class="n">修正後</th>
+      <th class="n">前月</th><th class="n">次月</th></tr></thead><tbody></tbody></table></div>
+    <div class="note" id="qaCaveat"></div>
+  </section>
+</div>
+
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="標的明細">
+  <button class="x" id="dClose" aria-label="關閉">×</button>
+  <div id="dBody"></div>
+</aside>
+
+<footer><div class="wrap">
+  球證行情所　資料日期 2026-09-06　球證報價基準 民國 115 年 8 月　歷史序列 1987-01 至 2026-07<br>
+  所有價格均為各仲介公開發布之<b>參考行情</b>，非實際成交價；過戶費依例由買方負擔。本站為公開資訊彙整與分析工具，不從事仲介撮合，不構成投資建議或要約。球證為流動性極低之另類資產，本站資料顯示 TGMI 曾自 1990 年高點下跌 67.9%，歷時 35.8 年才收復。
+</div></footer>
+
+<script id="DATA" type="application/json">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('DATA').textContent);
+const $ = (s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const fmt = (v,d=1)=> v==null||!isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct = v => v==null||!isFinite(v) ? '—' : (v>=0?'+':'')+v.toFixed(1)+'%';
+const cls = v => v==null?'mute':v>0?'up':v<0?'down':'mute';
+const M = D.index.months, MAIN = D.index.main;
+
+/* ---------- tabs ---------- */
+$$('.tabs button').forEach(b=>b.onclick=()=>{
+  $$('.tabs button').forEach(x=>x.setAttribute('aria-selected', x===b));
+  $$('.view').forEach(v=>v.hidden = v.id!=='v-'+b.dataset.v);
+  if(b.dataset.v==='idx') drawIndex();
+  if(b.dataset.v==='course'&&curCourse) renderCoursePanel();
+  syncTop();
+  window.scrollTo({top:0,behavior:'instant'});
+});
+
+/* ---------- ticker ---------- */
+(()=>{ const n=MAIN.length-1, prev=MAIN[n-12]||MAIN[0];
+  $('#tkV').textContent = fmt(MAIN[n]);
+  const d=(MAIN[n]/prev-1)*100;
+  const e=$('#tkD'); e.textContent = `${pct(d)} 近一年 · ${M[n]}`;
+  e.className='d '+cls(d);
+})();
+
+/* ---------- index chart ---------- */
+let scope='main', scale='log', range='all';
+const SCOPES = [['main','全市場'], ...Object.keys(D.index.region).map(r=>['r:'+r,r]),
+                ...Object.keys(D.index.tier).map(t=>['t:'+t, t.split(' ')[0]])];
+$('#scopeSeg').innerHTML = SCOPES.map(([k,l],i)=>
+  `<button data-k="${k}" aria-pressed="${i===0}">${l}</button>`).join('');
+$$('#scopeSeg button').forEach(b=>b.onclick=()=>{scope=b.dataset.k;
+  $$('#scopeSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); drawIndex();});
+$$('#scaleSeg button').forEach(b=>b.onclick=()=>{scale=b.dataset.s;
+  $$('#scaleSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); drawIndex();});
+$$('#rangeSeg button').forEach(b=>b.onclick=()=>{range=b.dataset.r;
+  $$('#rangeSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); drawIndex();});
+
+function seriesFor(k){
+  if(k==='main') return MAIN;
+  if(k.startsWith('r:')) return D.index.region[k.slice(2)];
+  return D.index.tier[k.slice(2)];
+}
+function drawIndex(){
+  const raw = seriesFor(scope);
+  let i0 = 0;
+  if(range!=='all') i0 = Math.max(0, raw.length - (+range)*12);
+  const v = raw.slice(i0), lbl = M.slice(i0);
+  const W=chartW('#idxWrap'), narrow=W<560;
+  const H=narrow?230:340, PL=narrow?42:58, PR=narrow?10:18, PT=14, PB=26;
+  const iw=W-PL-PR, ih=H-PT-PB;
+  const use = scale==='log';
+  const tv = x => use ? Math.log10(Math.max(x,1)) : x;
+  let lo=Math.min(...v), hi=Math.max(...v);
+  const pad=(tv(hi)-tv(lo))*0.08 || 1;
+  const y0=tv(lo)-pad, y1=tv(hi)+pad;
+  const X = i => PL + iw*(v.length<2?0.5:i/(v.length-1));
+  const Y = x => PT + ih*(1-(tv(x)-y0)/(y1-y0));
+  // ticks
+  let ticks=[];
+  if(use){ for(let e=1;e<=5;e++){ for(const m of [1,2,5]){ const t=m*Math.pow(10,e);
+      if(tv(t)>=y0&&tv(t)<=y1) ticks.push(t);} } }
+  else { const step=Math.pow(10,Math.floor(Math.log10(hi-lo||1)));
+    for(let t=Math.ceil(lo/step)*step;t<=hi;t+=step) ticks.push(t); }
+  if(ticks.length<2) ticks=[lo,hi];
+  // x ticks: 每 5 年或依區間
+  const yrs=[...new Set(lbl.map(s=>+s.slice(0,4)))];
+  const stepY = narrow ? (yrs.length>30?10:yrs.length>12?5:2)
+                       : (yrs.length>30?5:yrs.length>12?2:1);
+  const xt = yrs.filter(y=>y%stepY===0).map(y=>({y, i: lbl.findIndex(s=>s.startsWith(y+'-'))}))
+                .filter(o=>o.i>=0);
+  const path = v.map((x,i)=>`${i?'L':'M'}${X(i).toFixed(1)},${Y(x).toFixed(1)}`).join('');
+  const area = path+`L${X(v.length-1).toFixed(1)},${PT+ih}L${X(0).toFixed(1)},${PT+ih}Z`;
+  $('#idxChart').setAttribute('viewBox',`0 0 ${W} ${H}`);
+  $('#idxChart').innerHTML = `
+    ${ticks.map(t=>`<line class="g-grid" x1="${PL}" y1="${Y(t).toFixed(1)}" x2="${W-PR}" y2="${Y(t).toFixed(1)}"/>
+      <text class="g-lbl" x="${PL-9}" y="${(Y(t)+4).toFixed(1)}" text-anchor="end">${t.toLocaleString()}</text>`).join('')}
+    ${xt.map(o=>`<text class="g-lbl" x="${X(o.i).toFixed(1)}" y="${H-9}" text-anchor="middle">${o.y}</text>`).join('')}
+    <path class="g-area" d="${area}"/>
+    <path class="g-line" d="${path}"/>
+    <circle class="g-dot" cx="${X(v.length-1).toFixed(1)}" cy="${Y(v[v.length-1]).toFixed(1)}" r="4"/>
+    <g id="cross" style="display:none">
+      <line class="g-cross" y1="${PT}" y2="${PT+ih}"/>
+      <circle class="g-dot" r="4.5"/></g>
+    <rect x="${PL}" y="${PT}" width="${iw}" height="${ih}" fill="transparent" id="hit"/>`;
+  $('#idxLegend').innerHTML =
+    `<span><i style="background:var(--accent)"></i>${SCOPES.find(s=>s[0]===scope)[1]}　`+
+    `${lbl[0]} – ${lbl[lbl.length-1]}　${use?'對數座標':'線性座標'}</span>`;
+  // hover
+  const wrap=$('#idxWrap'); let tip=$('.tip',wrap);
+  if(!tip){ tip=document.createElement('div'); tip.className='tip'; tip.hidden=true; wrap.append(tip); }
+  const svg=$('#idxChart'), cross=$('#cross',svg);
+  svg.onmousemove = e=>{
+    const r=svg.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width*W;
+    let i=Math.round((px-PL)/iw*(v.length-1));
+    i=Math.max(0,Math.min(v.length-1,i));
+    cross.style.display='';
+    cross.querySelector('line').setAttribute('x1',X(i)); cross.querySelector('line').setAttribute('x2',X(i));
+    cross.querySelector('circle').setAttribute('cx',X(i)); cross.querySelector('circle').setAttribute('cy',Y(v[i]));
+    tip.hidden=false; tip.innerHTML=`${lbl[i]}<br><b>${fmt(v[i])}</b>`;
+    const lx=X(i)/W*r.width;
+    tip.style.left=Math.min(r.width-110,Math.max(0,lx+12))+'px';
+    tip.style.top=(Y(v[i])/H*r.height-14)+'px';
+  };
+  svg.onmouseleave=()=>{cross.style.display='none'; if(tip) tip.hidden=true;};
+  renderTiles(raw);
+}
+function renderTiles(v){
+  const pk=v.slice(0,120).reduce((a,x,i)=>x>v[a]?i:a,0);
+  const tr=v.reduce((a,x,i)=>i>=pk&&x<v[a]?i:a,pk);
+  const rec=v.findIndex((x,i)=>i>tr&&x>=v[pk]);
+  const n=v.length-1;
+  const cagr=(a,b)=>((v[b]/v[a])**(12/(b-a))-1)*100;
+  const t=[
+    ['泡沫高點', M[pk], fmt(v[pk],0), ''],
+    ['谷底', M[tr], pct((v[tr]/v[pk]-1)*100), 'neg'],
+    ['收復高點耗時', rec>0?M[rec]:'尚未收復', rec>0?((rec-pk)/12).toFixed(1)+' 年':'—', ''],
+    ['全期年化', M[0]+' 起', pct(cagr(0,n)), ''],
+    ['近 5 年年化', '', pct(cagr(Math.max(0,n-60),n)), ''],
+    ['現值', M[n], fmt(v[n],0), ''],
+  ];
+  $('#idxTiles').innerHTML = t.map(([k,sub,val,c])=>
+    `<div class="tile"><span class="v ${c}">${val}</span><p class="k">${k}${sub?'<br>'+sub:''}</p></div>`).join('');
+  if(scope==='main'){
+    $('#idxStory').innerHTML = `<b>這條線說的事。</b>台灣球證在 1987–1990 年有過一輪自己的泡沫，指數三年多上漲逾五倍，於 1990 年 4 月見頂。此後歷經 13 年下跌，2003 年 4 月觸底，<b>自高點回檔 67.9%</b>。市場花了 <b>35.8 年</b>——直到 2026 年 1 月——才重新站上 1990 年的價位。全期 40 年年化 +6.1%，但近五年年化達 +12.4%。日本 1990 年後的崩跌常被當成球證投資的警示案例，台灣其實不必外求：同樣的故事就寫在自己的資料裡。`;
+    $('#idxStory').hidden=false;
+  } else $('#idxStory').hidden=true;
+}
+
+/* ---------- sparkline ---------- */
+function spark(series, w=104, h=24){
+  const ks=Object.keys(series).sort(); if(ks.length<6) return '';
+  const cut=ks.slice(-120), v=cut.map(k=>series[k]);
+  const lo=Math.min(...v), hi=Math.max(...v), sp=hi-lo||1;
+  const pts=v.map((x,i)=>`${(i/(v.length-1)*(w-2)+1).toFixed(1)},${(h-2-(x-lo)/sp*(h-4)).toFixed(1)}`).join(' ');
+  const rising=v[v.length-1]>=v[0];
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true">
+    <polyline class="${rising?'sp-up':'sp-dn'}" points="${pts}"/></svg>`;
+}
+
+/* ---------- list ---------- */
+const ITEMS = D.items.filter(i=>i.mid!=null);
+const gapwe = i => i.fee && i.fee.gap_we || null;
+const beOf  = i => i.be_rounds_we ?? null;
+let sortK='mid', sortD=-1;
+const regions=[...new Set(ITEMS.map(i=>i.region).filter(Boolean))].sort();
+$('#fReg').innerHTML += regions.map(r=>`<option>${r}</option>`).join('');
+function rows(){
+  const q=$('#q').value.trim(), fr=$('#fReg').value, fc=$('#fConf').value;
+  let r=ITEMS.filter(i=>(!q||i.course.includes(q))&&(!fr||i.region===fr)&&(!fc||i.confidence===fc));
+  const get={course:i=>i.course, mid:i=>i.mid, cagr_1y:i=>i.cagr_1y, cagr_5y:i=>i.cagr_5y,
+    mdd:i=>i.mdd, fee_rate:i=>i.fee_rate, gapwe, be:beOf, dispersion:i=>i.dispersion}[sortK];
+  r.sort((a,b)=>{const x=get(a),y=get(b);
+    if(x==null&&y==null)return 0; if(x==null)return 1; if(y==null)return -1;
+    return typeof x==='string'? x.localeCompare(y)*sortD : (x-y)*sortD;});
+  return r;
+}
+function renderList(){
+  const r=rows();
+  $('#cnt').textContent=`${r.length} 檔`;
+  $('#tbl tbody').innerHTML = r.map(i=>`<tr data-id="${i.course}|${i.klass}">
+    <td class="name">${i.course}<small>${i.klass}</small></td>
+    <td class="opt2">${spark(i.series)}</td>
+    <td class="n">${fmt(i.mid,0)}</td>
+    <td class="n ${cls(i.cagr_1y)}">${pct(i.cagr_1y)}</td>
+    <td class="n ${cls(i.cagr_5y)}">${pct(i.cagr_5y)}</td>
+    <td class="n down opt">${i.mdd!=null?i.mdd.toFixed(0)+'%':'—'}</td>
+    <td class="n opt">${i.fee_rate!=null?i.fee_rate.toFixed(1)+'%':'—'}</td>
+    <td class="n opt2">${gapwe(i)?gapwe(i).toLocaleString():'—'}</td>
+    <td class="n opt">${beOf(i)!=null?fmt(beOf(i),0):'—'}</td>
+    <td class="n opt2">${i.dispersion!=null?i.dispersion.toFixed(1)+'%':'—'}</td>
+    <td><span class="badge b${i.confidence==='—'?'X':i.confidence}">${i.confidence}</span></td>
+  </tr>`).join('');
+  $$('#tbl tbody tr').forEach(tr=>tr.onclick=()=>openDrawer(tr.dataset.id));
+}
+$$('#tbl thead th.sortable').forEach(th=>th.onclick=()=>{
+  if(sortK===th.dataset.k) sortD*=-1; else {sortK=th.dataset.k; sortD=th.dataset.k==='course'?1:-1;}
+  $$('#tbl thead th').forEach(x=>{const s=$('.ar',x); if(s)s.remove();});
+  th.insertAdjacentHTML('beforeend',`<span class="ar"> ${sortD<0?'▼':'▲'}</span>`);
+  renderList();});
+['#q','#fReg','#fConf'].forEach(s=>$(s).oninput=renderList);
+
+/* ---------- drawer ---------- */
+const SRC={huifeng:'惠豐 08/17',godao:'公道 08/19',ylgolf:'悅來 08/26',golf168:'golf168 未標日'};
+function openDrawer(id){
+  const i=ITEMS.find(x=>`${x.course}|${x.klass}`===id); if(!i) return;
+  const ks=Object.keys(i.series).sort();
+  const v=ks.map(k=>i.series[k]);
+  let chart='';
+  if(v.length>5){
+    const W=500,H=150,P=6, lo=Math.min(...v), hi=Math.max(...v), sp=hi-lo||1;
+    const p=v.map((x,j)=>`${j?'L':'M'}${(P+j/(v.length-1)*(W-2*P)).toFixed(1)},${(H-P-(x-lo)/sp*(H-2*P-14)).toFixed(1)}`).join('');
+    chart=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;margin:0 0 6px">
+      <path class="d-line" d="${p}"/>
+      <text class="g-lbl" x="${P}" y="12" style="font-size:10px">${fmt(hi,0)} 萬（${ks[v.indexOf(hi)]}）</text>
+      <text class="g-lbl" x="${W-P}" y="12" text-anchor="end" style="font-size:10px">${ks[0]} – ${ks[ks.length-1]}</text>
+    </svg>`;
+  }
+  const qs=Object.entries(i.quotes).map(([s,q])=>{
+    const val=q.low==null? (q.status||'—') : (q.low===q.high? fmt(q.low,0) : `${fmt(q.low,0)}–${fmt(q.high,0)}`);
+    return `<dt>${SRC[s]||s}</dt><dd>${val}</dd>`;}).join('');
+  const f=i.fee||{};
+  $('#dBody').innerHTML=`
+    <h3 class="dh">${i.course}<span style="font-size:15px;color:var(--ink-3)"> · ${i.klass}</span></h3>
+    <p class="dsub">${i.region||'—'}　信心等級 ${i.confidence}　四源極差 ${i.dispersion!=null?i.dispersion.toFixed(2)+'%':'—'}　序列 ${i.since||'—'} 起 ${i.months||0} 期</p>
+    ${chart}
+    <h3 style="margin-top:6px;padding-top:0;border-top:0">價格與成本</h3>
+    <dl class="kv">
+      <dt>共識價（中位數）</dt><dd>${fmt(i.mid,0)} 萬</dd>
+      <dt>保證金（可退部分）</dt><dd>${i.deposit?fmt(i.deposit,0)+' 萬':'—'}</dd>
+      <dt>淨價</dt><dd>${fmt(i.net_price,0)} 萬</dd>
+      <dt>過戶費</dt><dd>${i.transfer_fee!=null?fmt(i.transfer_fee,2)+' 萬':'—'}</dd>
+      <dt>過戶費率</dt><dd>${i.fee_rate!=null?i.fee_rate.toFixed(1)+'%':'—'}</dd>
+      <dt><b>總取得成本</b></dt><dd><b>${fmt(i.all_in,0)} 萬</b></dd>
+      <dt>年費（年化）</dt><dd>${i.annual_dues?i.annual_dues.toLocaleString()+' 元':'—'}</dd>
+    </dl>
+    <h3>四來源原始報價（萬元）</h3>
+    <dl class="kv">${qs}</dl>
+    <h3>績效</h3>
+    <dl class="kv">
+      <dt>近 1 年</dt><dd class="${cls(i.cagr_1y)}">${pct(i.cagr_1y)}</dd>
+      <dt>近 5 年年化</dt><dd class="${cls(i.cagr_5y)}">${pct(i.cagr_5y)}</dd>
+      <dt>近 10 年年化</dt><dd class="${cls(i.cagr_10y)}">${pct(i.cagr_10y)}</dd>
+      <dt>全期年化</dt><dd class="${cls(i.cagr_all)}">${pct(i.cagr_all)}</dd>
+      <dt>年化波動</dt><dd>${i.vol!=null?i.vol.toFixed(1)+'%':'—'}</dd>
+      <dt>最大回撤</dt><dd class="down">${i.mdd!=null?i.mdd.toFixed(1)+'%':'—'}</dd>
+      <dt>回撤期間</dt><dd>${i.mdd_span?i.mdd_span.join(' → '):'—'}</dd>
+      <dt>距歷史高點</dt><dd class="${cls(i.from_ath)}">${pct(i.from_ath)}</dd>
+    </dl>
+    <h3>擊球費與使用價值</h3>
+    ${f.guest_we? `<dl class="kv">
+      <dt>會員 平日 / 假日</dt><dd>${f.member_wd?f.member_wd.toLocaleString():'—'} / ${f.member_we?f.member_we.toLocaleString():'—'}</dd>
+      <dt>來賓 平日 / 假日</dt><dd>${f.guest_wd?f.guest_wd.toLocaleString():'—'} / ${f.guest_we?f.guest_we.toLocaleString():'—'}</dd>
+      <dt>假日價差</dt><dd>${f.gap_we?f.gap_we.toLocaleString()+' 元/場':'—'}</dd>
+      <dt>年持有成本</dt><dd>${i.annual_carry?i.annual_carry.toLocaleString()+' 元':'—'}</dd>
+      <dt><b>損益兩平（全假日）</b></dt><dd><b>${beOf(i)!=null?fmt(beOf(i),1)+' 場/年':'—'}</b></dd>
+    </dl>${f.fee_flag?`<p class="dsub">⚠ ${f.fee_flag}</p>`:''}`
+    : `<p class="dsub">此球場未取得可靠的會員／來賓收費對照。</p>`}`;
+  $('#drawer').hidden=false; $('#scrim').hidden=false;
+}
+$('#dClose').onclick=$('#scrim').onclick=()=>{$('#drawer').hidden=true;$('#scrim').hidden=true;};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#dClose').click();});
+
+/* ---------- rank ---------- */
+function miniTable(title, note, rowsArr, cols){
+  return `<div class="card pad"><h3>${title}</h3>
+    <p class="sec-note" style="margin-bottom:10px">${note}</p>
+    <div class="scroller" style="border:0"><table class="narrow">
+    <tbody>${rowsArr.map(r=>`<tr data-id="${r.id}">
+      <td class="name">${r.n}<small>${r.k}</small></td>
+      ${cols.map(c=>`<td class="n ${c.cls?c.cls(r):''}">${c.f(r)}</td>`).join('')}
+    </tr>`).join('')}</tbody></table></div></div>`;
+}
+(()=>{
+  const mk=i=>({id:`${i.course}|${i.klass}`,n:i.course,k:i.klass,i});
+  const withY=ITEMS.filter(i=>i.cagr_1y!=null);
+  const up=[...withY].sort((a,b)=>b.cagr_1y-a.cagr_1y).slice(0,10).map(mk);
+  const dn=[...withY].sort((a,b)=>a.cagr_1y-b.cagr_1y).slice(0,10).map(mk);
+  const fee=ITEMS.filter(i=>i.fee_rate!=null).sort((a,b)=>b.fee_rate-a.fee_rate).slice(0,10).map(mk);
+  const be=ITEMS.filter(i=>beOf(i)!=null).sort((a,b)=>beOf(a)-beOf(b)).slice(0,10).map(mk);
+  $('#rankGrid').innerHTML =
+    miniTable('近一年漲幅','以各標的自身月度序列計算',up,
+      [{f:r=>fmt(r.i.mid,0)+' 萬'},{f:r=>pct(r.i.cagr_1y),cls:r=>cls(r.i.cagr_1y)}])+
+    miniTable('近一年跌幅','下跌或停滯的標的同樣重要',dn,
+      [{f:r=>fmt(r.i.mid,0)+' 萬'},{f:r=>pct(r.i.cagr_1y),cls:r=>cls(r.i.cagr_1y)}])+
+    miniTable('過戶費率最高','過戶費 ÷ 共識價。這筆錢付給球場，不是賣方',fee,
+      [{f:r=>fmt(r.i.mid,0)+' 萬'},{f:r=>r.i.fee_rate.toFixed(1)+'%',cls:()=>'down'}])+
+    miniTable('最容易靠打球回本','全假日情境下，每年打幾場可打平持有成本',be,
+      [{f:r=>fmt(r.i.all_in,0)+' 萬'},{f:r=>fmt(beOf(r.i),1)+' 場'}]);
+  $$('#rankGrid tr').forEach(tr=>{tr.onclick=()=>openDrawer(tr.dataset.id);});
+})();
+
+/* ---------- calculator ---------- */
+const CAL = ITEMS.filter(i=>i.fee&&i.fee.gap_we&&i.mid!=null)
+                 .sort((a,b)=>a.course.localeCompare(b.course));
+$('#cSel').innerHTML = CAL.map(i=>`<option value="${i.course}|${i.klass}">${i.course} · ${i.klass}</option>`).join('');
+function calc(){
+  const i=CAL.find(x=>`${x.course}|${x.klass}`===$('#cSel').value); if(!i) return;
+  const n=+$('#cRounds').value||0, wePct=(+$('#cWe').value||0)/100, coc=(+$('#cCoc').value||0)/100;
+  const we=n*wePct, wd=n-we;
+  const f=i.fee;
+  const save = we*(f.gap_we||0) + wd*(f.gap_wd||f.gap_we||0);
+  const allIn=(i.mid+(i.transfer_fee||0))*10000;
+  const carry=allIn*coc+(i.annual_dues||0);
+  const net=save-carry;
+  const need = (f.gap_we&&f.gap_wd) ? carry/(wePct*f.gap_we+(1-wePct)*f.gap_wd) : null;
+  $('#cOut').innerHTML=`
+    <div><span class="v">${Math.round(allIn/10000).toLocaleString()} 萬</span><p class="k">總取得成本<br>含過戶費 ${fmt(i.transfer_fee,1)} 萬</p></div>
+    <div><span class="v">${Math.round(carry).toLocaleString()} 元</span><p class="k">每年持有成本<br>資金成本＋年費</p></div>
+    <div><span class="v">${Math.round(save).toLocaleString()} 元</span><p class="k">每年省下的擊球費<br>打 ${n} 場（假日 ${Math.round(we)} 場）</p></div>
+    <div><span class="v ${net<0?'neg':''}">${net>=0?'+':''}${Math.round(net).toLocaleString()} 元</span><p class="k">年度淨損益<br>不含資本利得</p></div>
+    <div><span class="v">${need!=null?fmt(need,1):'—'} 場</span><p class="k">損益兩平場次<br>維持目前平假日比例</p></div>`;
+  const feeTxt = f.member_we? `會員假日 ${f.member_we.toLocaleString()} / 來賓假日 ${f.guest_we.toLocaleString()} 元` : '';
+  $('#cNote').innerHTML = net>=0
+    ? `<b>以你設定的打球頻率，這張證的使用價值已覆蓋持有成本。</b>${feeTxt}。此結果不含資本利得——${i.course}近五年年化 ${pct(i.cagr_5y)}，最大回撤 ${i.mdd!=null?i.mdd.toFixed(0)+'%':'—'}，價格風險需另行評估。`
+    : `<b>以你設定的打球頻率，光靠省下的擊球費不足以覆蓋持有成本，每年短少 ${Math.round(-net).toLocaleString()} 元。</b>${feeTxt}。這代表買進的理由必須來自資本利得或會籍本身的價值，而非省錢——${i.course}近五年年化 ${pct(i.cagr_5y)}，最大回撤 ${i.mdd!=null?i.mdd.toFixed(0)+'%':'—'}。`;
+}
+['#cSel','#cRounds','#cWe','#cCoc'].forEach(s=>$(s).oninput=calc);
+
+/* ---------- quality ---------- */
+(()=>{
+  const multi=ITEMS.filter(i=>i.n_sources>=2&&i.dispersion!=null);
+  const ds=multi.map(i=>i.dispersion).sort((a,b)=>a-b);
+  const med=ds[Math.floor(ds.length/2)];
+  const cA=ITEMS.filter(i=>i.confidence==='A').length, cB=ITEMS.filter(i=>i.confidence==='B').length,
+        cC=ITEMS.filter(i=>i.confidence==='C').length;
+  $('#qaTiles').innerHTML=[
+    [D.stats.n_quotes.toLocaleString(),'歷史月度報價筆數<br>1987-01 至 2026-07'],
+    [D.stats.n_series,'具歷史序列的標的'],
+    [med.toFixed(2)+'%','四來源極差率中位數<br>球證報價'],
+    [cA+' / '+cB+' / '+cC,'信心等級 A / B / C'],
+    [D.corrections.length,'已修正的來源錯字'],
+    [D.stats.n_fee_courses,'可算擊球價差的球場'],
+  ].map(([v,k])=>`<div class="tile"><span class="v">${v}</span><p class="k">${k}</p></div>`).join('');
+  $('#qaDisp tbody').innerHTML = multi.sort((a,b)=>b.dispersion-a.dispersion).slice(0,10)
+    .map(i=>{const g=s=>{const q=i.quotes[s]; if(!q) return '—';
+        return q.low==null?(q.status||'—'):fmt((q.low+q.high)/2,0);};
+      return `<tr data-id="${i.course}|${i.klass}"><td class="name">${i.course}<small>${i.klass}</small></td>
+      <td class="n">${g('huifeng')}</td><td class="n">${g('godao')}</td>
+      <td class="n">${g('ylgolf')}</td><td class="n">${g('golf168')}</td>
+      <td class="n"><b>${fmt(i.mid,0)}</b></td>
+      <td class="n ${i.dispersion>5?'down':''}">${i.dispersion.toFixed(1)}%</td></tr>`;}).join('');
+  $$('#qaDisp tbody tr').forEach(tr=>tr.onclick=()=>openDrawer(tr.dataset.id));
+  $('#qaFix tbody').innerHTML = D.corrections.map(c=>`<tr>
+    <td class="name">${c.course}<small>${c.klass}</small></td><td class="n">${c.ym}</td>
+    <td class="n down">${fmt(c.was,0)}</td><td class="n">${fmt(c.now,0)}</td>
+    <td class="n mute">${fmt(c.prev,0)}</td><td class="n mute">${fmt(c.next,0)}</td></tr>`).join('');
+  $('#qaCaveat').innerHTML=`<b>三個必須知道的限制。</b>
+    一、歷史序列<b>僅來自單一來源</b>（悅來高爾夫），無法交叉驗證；四來源比對只適用於 2026 年 8 月的當期報價，指數的歷史段應視為單源重建。
+    二、擊球費的跨源分歧遠大於球證報價（來賓假日價極差中位數約 24%，球證為 ${med.toFixed(1)}%），且會員價多藏在備註文字中，有 5 座球場的會員價因抽取結果不合理（高於來賓價）已剔除。
+    三、所有數字都是<b>掛牌參考行情，不是成交價</b>；低流動性標的的掛牌價可能長期未反映真實成交。`;
+})();
+
+
+/* =================== 球場走勢 =================== */
+const C = D.courses;
+const REGORDER = ['台北新北','桃園','竹苗','中彰投','嘉南高屏','花東'];
+let curReg = '台北新北', curCourse = null, curHide = new Set(), cScale='lin', cRange='all';
+
+$('#regChips').innerHTML = REGORDER.filter(r=>C.regions[r]).map(r=>
+  `<button class="chip" data-r="${r}" aria-pressed="${r===curReg}">${r}
+   <span style="opacity:.6;font-family:var(--mono);font-size:11px">${C.regions[r].length}</span></button>`).join('');
+$$('#regChips .chip').forEach(b=>b.onclick=()=>{
+  curReg=b.dataset.r; curCourse=null;
+  $$('#regChips .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  renderCourseGrid(); $('#coursePanel').innerHTML='';
+});
+
+function statusOf(c){
+  const m=C.meta[c];
+  if(m.status==='有報價') return ['on','交易中'];
+  if(!m.active) return ['off','已停止 · 資料至 '+m.last];
+  return ['hold', m.status];
+}
+function renderCourseGrid(){
+  const list=C.regions[curReg]||[];
+  $('#courseGrid').innerHTML = list.map(c=>{
+    const ks=C.data[curReg][c]; const m=C.meta[c];
+    const [sc,st]=statusOf(c);
+    const prices=Object.values(ks).map(k=>k.cur).filter(x=>x!=null);
+    const cur=prices.length?Math.max(...prices).toLocaleString()+' 萬':'—';
+    const yrs=Object.values(ks).map(k=>k.first.slice(0,4));
+    return `<button class="cbtn" data-c="${c}" aria-pressed="${c===curCourse}">
+      <span class="cn">${c}</span>
+      <span class="cm"><span>${Math.min(...yrs)} 起 · ${m.n_class} 類</span><span>${cur}</span></span>
+      <span class="st ${sc}">${st}</span></button>`;}).join('');
+  $$('#courseGrid .cbtn').forEach(b=>b.onclick=()=>{
+    curCourse=b.dataset.c; curHide=new Set();
+    $$('#courseGrid .cbtn').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    renderCoursePanel();});
+}
+function renderCoursePanel(){
+  if(!curCourse){$('#coursePanel').innerHTML='';return;}
+  const ks=C.data[curReg][curCourse], m=C.meta[curCourse];
+  // 取資料最長的前 4 類上色，其餘預設隱藏（不循環配色）
+  const names=Object.keys(ks).sort((a,b)=>ks[b].n-ks[a].n);
+  const shown=names.slice(0,4);
+  const gf=m.gf;
+  $('#coursePanel').innerHTML = `
+   <div class="card pad">
+     <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px">
+       <div><h3 style="font-family:var(--serif);font-size:20px;margin:0">${curCourse}</h3>
+         <p class="dsub" style="margin:2px 0 0">${curReg}　${statusOf(curCourse)[1]}　${names.length} 個會員類別</p></div>
+       <div class="chartbar" style="margin:0">
+         <div class="seg" id="cScaleSeg">
+           <button data-s="lin" aria-pressed="${cScale==='lin'}">線性</button>
+           <button data-s="log" aria-pressed="${cScale==='log'}">對數</button></div>
+         <div class="seg" id="cRangeSeg">
+           <button data-r="all" aria-pressed="${cRange==='all'}">全期</button>
+           <button data-r="20" aria-pressed="${cRange==='20'}">20 年</button>
+           <button data-r="10" aria-pressed="${cRange==='10'}">10 年</button>
+           <button data-r="5" aria-pressed="${cRange==='5'}">5 年</button></div>
+       </div>
+     </div>
+     <div class="chartwrap" id="cWrap"><svg class="chart" id="cChart"></svg></div>
+     <div class="slegend" id="cLegend"></div>
+     ${names.length>4?`<p class="dsub" style="margin-top:10px">此球場有 ${names.length} 個類別，圖上僅同時顯示資料最長的 4 個以維持可辨識度。</p>`:''}
+   </div>
+   ${gf&&gf.guest_we?`<div class="note"><b>擊球費。</b>
+     會員 平日 ${gf.member_wd?gf.member_wd.toLocaleString():'—'} / 假日 ${gf.member_we?gf.member_we.toLocaleString():'—'} 元；
+     來賓 平日 ${gf.guest_wd?gf.guest_wd.toLocaleString():'—'} / 假日 ${gf.guest_we?gf.guest_we.toLocaleString():'—'} 元。
+     ${gf.gap_we?`假日價差 <b>${gf.gap_we.toLocaleString()} 元/場</b>。`:''}
+     ${gf.fee_flag?`⚠ ${gf.fee_flag}`:''}</div>`:''}
+   <h3 class="subhead">年度價格表</h3>
+   <p class="sec-note">各年年末價（該年最後一個有數值的月份）與相對前一年的變動。</p>
+   <div class="scroller"><table id="cAnn"><thead><tr><th>年度</th>
+     ${shown.map((k,i)=>`<th class="n" colspan="2"><span class="s${i}" style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px"></span>${k}</th>`).join('')}
+   </tr><tr><th></th>${shown.map(()=>'<th class="n">年末</th><th class="n">變動</th>').join('')}</tr></thead>
+   <tbody id="cAnnB"></tbody></table></div>`;
+  $$('#cScaleSeg button').forEach(b=>b.onclick=()=>{cScale=b.dataset.s;renderCoursePanel();});
+  $$('#cRangeSeg button').forEach(b=>b.onclick=()=>{cRange=b.dataset.r;renderCoursePanel();});
+  drawCourse(shown, ks);
+  // 年度表
+  const years=[...new Set(shown.flatMap(k=>ks[k].annual.map(a=>a.year)))].sort((a,b)=>b-a);
+  $('#cAnnB').innerHTML = years.map(y=>`<tr><td class="n">${y}</td>${shown.map(k=>{
+    const a=ks[k].annual.find(x=>x.year===y);
+    if(!a) return '<td class="n mute">—</td><td class="n mute">—</td>';
+    return `<td class="n">${fmt(a.dec,0)}</td><td class="n ${cls(a.yoy)}">${a.yoy==null?'—':pct(a.yoy)}</td>`;
+  }).join('')}</tr>`).join('');
+}
+function drawCourse(shown, ks){
+  const vis=shown.filter(k=>!curHide.has(k));
+  const allM=[...new Set(shown.flatMap(k=>Object.keys(ks[k].series)))].sort();
+  let ms=allM;
+  if(cRange!=='all'){ const cut=ms.length-(+cRange)*12; ms=ms.slice(Math.max(0,cut)); }
+  const W=chartW('#cWrap'), narrow=W<560;
+  const H=narrow?220:320, PL=narrow?42:58, PR=narrow?10:18, PT=14, PB=26;
+  const iw=W-PL-PR, ih=H-PT-PB;
+  const vals=vis.flatMap(k=>ms.map(m=>ks[k].series[m]).filter(x=>x!=null));
+  if(!vals.length||ms.length<2){$('#cChart').innerHTML='';return;}
+  const use=cScale==='log';
+  const tv=x=>use?Math.log10(Math.max(x,0.5)):x;
+  const lo=Math.min(...vals), hi=Math.max(...vals);
+  const pad=(tv(hi)-tv(lo))*0.08||0.5, y0=tv(lo)-pad, y1=tv(hi)+pad;
+  const X=i=>PL+iw*(i/(ms.length-1)), Y=x=>PT+ih*(1-(tv(x)-y0)/(y1-y0));
+  let ticks=[];
+  if(use){for(let e=-1;e<=5;e++)for(const q of[1,2,5]){const t=q*Math.pow(10,e);
+    if(tv(t)>=y0&&tv(t)<=y1)ticks.push(t);}}
+  else{const st=Math.pow(10,Math.floor(Math.log10((hi-lo)||1)));
+    for(let t=Math.ceil(lo/st)*st;t<=hi;t+=st)ticks.push(t);}
+  if(ticks.length<2)ticks=[lo,hi];
+  const yrs=[...new Set(ms.map(x=>+x.slice(0,4)))];
+  const sy = narrow ? (yrs.length>30?10:yrs.length>12?5:2)
+                    : (yrs.length>30?5:yrs.length>12?2:1);
+  const xt=yrs.filter(y=>y%sy===0).map(y=>({y,i:ms.findIndex(x=>x.startsWith(y+'-'))})).filter(o=>o.i>=0);
+  const paths=vis.map(k=>{
+    const idx=shown.indexOf(k);
+    let d='',open=false;
+    ms.forEach((m,i)=>{const v=ks[k].series[m];
+      if(v==null){open=false;return;}
+      d+=`${open?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`;open=true;});
+    const li=ms.map((m,i)=>ks[k].series[m]!=null?i:-1).filter(i=>i>=0).pop();
+    const dot=li!=null?`<circle class="g-dot d${idx}" cx="${X(li).toFixed(1)}" cy="${Y(ks[k].series[ms[li]]).toFixed(1)}" r="3.5"/>`:'';
+    return `<path class="g-line l${idx}" d="${d}"/>${dot}`;}).join('');
+  $('#cChart').setAttribute('viewBox',`0 0 ${W} ${H}`);
+  $('#cChart').innerHTML=`
+    ${ticks.map(t=>`<line class="g-grid" x1="${PL}" y1="${Y(t).toFixed(1)}" x2="${W-PR}" y2="${Y(t).toFixed(1)}"/>
+      <text class="g-lbl" x="${PL-9}" y="${(Y(t)+4).toFixed(1)}" text-anchor="end">${t.toLocaleString()}</text>`).join('')}
+    ${xt.map(o=>`<text class="g-lbl" x="${X(o.i).toFixed(1)}" y="${H-9}" text-anchor="middle">${o.y}</text>`).join('')}
+    ${paths}
+    <g id="ccross" style="display:none"><line class="g-cross" y1="${PT}" y2="${PT+ih}"/></g>
+    <rect x="${PL}" y="${PT}" width="${iw}" height="${ih}" fill="transparent"/>`;
+  $('#cLegend').innerHTML=shown.map((k,i)=>
+    `<button data-k="${k}" aria-pressed="${!curHide.has(k)}"><i class="s${i}"></i>${k}
+      <span class="mute" style="font-family:var(--mono);font-size:11px">${ks[k].first}–${ks[k].last}</span></button>`).join('')
+    +`<span class="mute" style="font-family:var(--mono);font-size:11px">單位：萬元${use?' · 對數座標':''}</span>`;
+  $$('#cLegend button').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;
+    if(curHide.has(k)) curHide.delete(k); else if(vis.length>1) curHide.add(k);
+    drawCourse(shown,ks);});
+  // hover
+  const wrap=$('#cWrap'); let tip=$('.tip',wrap);
+  if(!tip){tip=document.createElement('div');tip.className='tip';tip.hidden=true;wrap.append(tip);}
+  const svg=$('#cChart'), cr=$('#ccross',svg);
+  svg.onmousemove=e=>{const r=svg.getBoundingClientRect();
+    let i=Math.round(((e.clientX-r.left)/r.width*W-PL)/iw*(ms.length-1));
+    i=Math.max(0,Math.min(ms.length-1,i));
+    cr.style.display='';cr.querySelector('line').setAttribute('x1',X(i));cr.querySelector('line').setAttribute('x2',X(i));
+    tip.hidden=false;
+    tip.innerHTML=`${ms[i]}<br>`+vis.map(k=>{const v=ks[k].series[ms[i]];
+      return v==null?'':`${k} <b>${fmt(v,0)}</b>`;}).filter(Boolean).join('<br>');
+    const lx=X(i)/W*r.width;
+    tip.style.left=Math.min(r.width-140,Math.max(0,lx+12))+'px';
+    tip.style.top='14px';};
+  svg.onmouseleave=()=>{cr.style.display='none';if(tip)tip.hidden=true;};
+}
+
+/* =================== 年度查詢 =================== */
+const YEARS=[...new Set(Object.values(C.data).flatMap(cs=>Object.values(cs)
+  .flatMap(ks=>Object.values(ks).flatMap(k=>k.annual.map(a=>a.year)))))].sort((a,b)=>b-a);
+$('#ySel').innerHTML=YEARS.map(y=>`<option>${y}</option>`).join('');
+$('#yReg').innerHTML+=REGORDER.filter(r=>C.regions[r]).map(r=>`<option>${r}</option>`).join('');
+let ySortK='dec', ySortD=-1;
+function yearRows(){
+  const y=+$('#ySel').value, fr=$('#yReg').value;
+  const out=[];
+  for(const [reg,cs] of Object.entries(C.data)){
+    if(fr&&reg!==fr) continue;
+    for(const [course,ks] of Object.entries(cs))
+      for(const [klass,k] of Object.entries(ks)){
+        const a=k.annual.find(x=>x.year===y);
+        if(a) out.push({course,klass,reg,...a});
+      }}
+  out.sort((p,q)=>{const x=p[ySortK],z=q[ySortK];
+    if(x==null&&z==null)return 0; if(x==null)return 1; if(z==null)return -1;
+    return typeof x==='string'?x.localeCompare(z)*ySortD:(x-z)*ySortD;});
+  return out;
+}
+function renderYear(){
+  const r=yearRows(), y=+$('#ySel').value;
+  $('#yCnt').textContent=`${y} 年共 ${r.length} 檔有報價`;
+  $('#yTbl tbody').innerHTML=r.map(a=>`<tr>
+    <td class="name">${a.course}<small>${a.klass}</small></td>
+    <td class="mute opt" style="font-size:12px">${a.reg}</td>
+    <td class="n">${fmt(a.jan,0)}</td><td class="n"><b>${fmt(a.dec,0)}</b></td>
+    <td class="n mute opt">${fmt(a.lo,0)}</td><td class="n mute opt">${fmt(a.hi,0)}</td>
+    <td class="n opt2">${fmt(a.avg,0)}</td>
+    <td class="n ${cls(a.yoy)}">${a.yoy==null?'—':pct(a.yoy)}</td>
+    <td class="n mute opt2">${a.n}</td></tr>`).join('');
+  const ups=r.filter(a=>a.yoy!=null);
+  if(ups.length){
+    const med=[...ups].sort((p,q)=>p.yoy-q.yoy)[Math.floor(ups.length/2)].yoy;
+    const best=[...ups].sort((p,q)=>q.yoy-p.yoy)[0], worst=[...ups].sort((p,q)=>p.yoy-q.yoy)[0];
+    const idxY=M.map((m,i)=>m.startsWith(y+'-')?i:-1).filter(i=>i>=0);
+    const tg=idxY.length>1?((MAIN[idxY[idxY.length-1]]/MAIN[idxY[0]]-1)*100):null;
+    $('#yNote').innerHTML=`<b>${y} 年概況。</b>中位數年變動 <b>${pct(med)}</b>；
+      漲最多 ${best.course}·${best.klass} <b>${pct(best.yoy)}</b>，
+      跌最多 ${worst.course}·${worst.klass} <b>${pct(worst.yoy)}</b>。
+      ${tg!=null?`同年 TGMI 指數變動 ${pct(tg)}。`:''}`;
+  } else $('#yNote').innerHTML=`<b>${y} 年。</b>此為序列起始年度，尚無前一年可供比較。`;
+}
+$$('#yTbl thead th.sortable').forEach(th=>th.onclick=()=>{
+  const k=th.dataset.yk;
+  if(ySortK===k) ySortD*=-1; else {ySortK=k; ySortD=k==='course'?1:-1;}
+  renderYear();});
+['#ySel','#yReg'].forEach(x=>$(x).onchange=renderYear);
+
+/* =================== 亞洲比較 =================== */
+const ASIA=[
+ {c:'台灣',f:'Taiwan',nature:'股東制／會員制，永久',mkt:'成熟：4 家仲介公開報價，40 年月度歷史',
+  top:'NT$1,695 萬<br><span class="mute">東方 個人</span>',hold:'年費相對低，過戶費率中位 8.2%',
+  trend:'強勢上漲',trendc:'up',ok:'高',
+  d:{'頂級標的':'東方 個人 1,695 萬','市場廣度':'約 60 座球場','資料可得性':'40 年月度','過戶費率':'0.3%–154%'},
+  txt:'供給端故事最極端：山坡地開發管制趨嚴，加上中科二期徵收興農球場，新增供給接近零。標的離散度極大（6 萬至 1,695 萬，280 倍），選擇空間大但沒有指數可買。',
+  v:'<b>可投資，但必須選標的。</b>本站資料顯示，同一時期不同球場的年變動差距可達 40 個百分點以上，整體市場的平均報酬不代表任一張證的報酬。'},
+ {c:'日本',f:'Japan',nature:'預託金制 80%／株主會員制／社團法人制',mkt:'最成熟：549 座球場月間平均行情、都縣別指數、30 年個股圖表',
+  top:'泡沫期全國均價<br>3,600 萬日圓',hold:'年會費 3–8 萬日圓，<b>2026 年普遍調漲</b>',
+  trend:'連 5 年上漲',trendc:'up',ok:'高',
+  d:{'1990 年均價':'3,600 萬日圓','1993 年均價':'約 900 萬日圓','跌幅':'約 −75%','極端案例':'跌至 1/24'},
+  txt:'預託金制佔約八成：繳存保證金換取擊球權，無息，到期可請求返還。株主會員制近似台灣的股東制。2025 年關東圈平均價格已是連續第 5 年上漲，山梨縣因酷暑帶動「避暑地買い」漲幅居首。',
+  v:'<b>資料品質最高，目前處於多頭。</b>但 1990 年後的崩跌是這個資產類別最重要的風險樣本，且年會費會被單方面調漲——PGM、Accordia 已帶頭把 3 萬調到 5 萬、5 萬調到 8 萬日圓。'},
+ {c:'韓國',f:'Korea',nature:'會員制／大眾型／非會員制（法定三級）',mkt:'成熟：ACEPI 等會員權指數、交易所月報',
+  top:'22.4 億韓元<br><span class="mute">南部，約 NT$4,900 萬</span>',hold:'年회비；稅制隨分類而異',
+  trend:'轉弱',trendc:'down',ok:'中',
+  d:{'頂級標的':'南部 22.4 億韓元','首都圈平均':'3.95 億韓元','全國平均':'2.52 億韓元','ACEPI 高點':'2008/03 1715.3 點'},
+  txt:'體育設施法把球場改為三級：會員制（可募會員、重稅）、大眾型（不可募會員、綠費須低於會員制非會員均價 4 萬韓元、享稅優）、非會員制（自由訂價但課重稅）。實務上出現大眾型綠費比會員制還貴的爭議。',
+  v:'<b>政策風險最高。</b>政府可直接規定綠費水準，等於對現金流做行政管制。加上供給過剩與海外替代（赴東南亞打球），下行壓力正在累積。'},
+ {c:'泰國',f:'Thailand',nature:'終身會員，可完整轉讓',mkt:'有交易中心，但深度有限',
+  top:'約 100 萬泰銖<br><span class="mute">約 NT$95 萬</span>',hold:'<b>月費 25,000 泰銖</b>（Alpine）',
+  trend:'平穩',trendc:'mute',ok:'低',
+  d:{'綠費區間':'1,500–5,500 泰銖','曼谷頂級平日':'USD 130–150','週末加價':'+25–30%','Alpine 過戶費':'9 萬泰銖'},
+  txt:'頂級俱樂部（Alpine、Blue Canyon、Thai Country Club）終身會員約 100 萬泰銖起，具完整轉讓權。但持有成本極高：Alpine 月費 25,000 泰銖，一年約 30 萬泰銖。',
+  v:'<b>持有成本吃掉全部潛在價差。</b>月費 25,000 泰銖約等於每月打 5–6 次頂級球場的綠費。會籍的價值在身分與訂位，不在增值——綠費本身夠便宜，買證的財務理由不成立。'},
+ {c:'越南',f:'Vietnam',nature:'<b>定期使用權（有到期日）</b>',mkt:'有仲介，透明度較低',
+  top:'USD 16,500<br><span class="mute">約 NT$51 萬</span>',hold:'內含於卡價，隨年期攤銷',
+  trend:'綠費導向',trendc:'mute',ok:'低',
+  d:{'一般綠費':'USD 50–100','頂級綠費':'USD 180–300','Chí Linh 卡':'效期至 2026','Yên Thắng 卡':'效期至 2046'},
+  txt:'會員卡有明確到期日：Chí Linh 約 USD 15,500–16,500 效期至 2026、Yên Thắng 約 USD 11,500–12,500 效期至 2046。轉讓價一般 2–5 億越南盾。綠費多為含桿弟與球車的 all-inclusive。',
+  v:'<b>財務上是攤銷型資產，不是所有權。</b>「終身卡」實為長租約，會隨剩餘年期折舊，與台灣的永久性球證性質完全不同，不應放在同一張報酬率表上比較。'},
+];
+$('#asiaTbl tbody').innerHTML=ASIA.map(a=>`<tr>
+  <td class="name">${a.c}<small>${a.f}</small></td>
+  <td style="white-space:normal;max-width:190px">${a.nature}</td>
+  <td style="white-space:normal;max-width:220px" class="mute">${a.mkt}</td>
+  <td class="n">${a.top}</td>
+  <td style="white-space:normal;max-width:180px">${a.hold}</td>
+  <td class="${a.trendc}">${a.trend}</td>
+  <td><span class="badge ${a.ok==='高'?'bA':a.ok==='中'?'bB':'bC'}">${a.ok}</span></td></tr>`).join('');
+$('#asiaCards').innerHTML=ASIA.map(a=>`<div class="acard">
+  <p class="flag">${a.f}</p><h3>${a.c}</h3>
+  <dl>${Object.entries(a.d).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+  <p>${a.txt}</p><p class="verdict">${a.v}</p></div>`).join('');
+$('#asiaNote').innerHTML=`<b>比較時最容易犯的錯。</b>
+  把四國的「頂級標的價位」並排，會得出韓國最貴、越南最便宜的結論——但那是在比較四種不同的東西。
+  韓國的 22.4 億韓元買的是可募會員的會員制球場會籍；越南的 USD 16,500 買的是一份到 2026 年就到期的使用權；
+  泰國的 100 萬泰銖買的是一個每年還要再付 30 萬泰銖的身分。
+  只有台灣與日本的標的，在法律性質上接近「可永久持有、可自由轉讓、有次級市場定價」的資產。
+  <b>台灣真正的對照組是日本，不是東南亞。</b>而日本提供的最重要資訊不是它現在連 5 年上漲，
+  是它證明了這類資產可以在三年內跌掉 75%，並且花二十年不回來——這一點台灣的 TGMI 也已經自己驗證過一次（1990 年高點後 −67.9%，35.8 年才收復）。`;
+
+
+/* =================== 擊球費：有證 vs 無證 =================== */
+const F = D.fees;
+$('#fReg2').innerHTML += [...new Set(F.map(r=>r.region))].sort()
+  .map(r=>`<option>${r}</option>`).join('');
+function feeCalc(){
+  const n=Math.max(1,+$('#fRounds').value||1), wp=(+$('#fWe').value||0)/100;
+  const we=n*wp, wd=n-we, reg=$('#fReg2').value, sk=$('#fSort').value;
+  const rows=F.filter(r=>(!reg||r.region===reg)&&r.gwe)
+    .map(r=>{
+      const mwe=r.mwe, mwd=r.mwd??r.mwe, gwd=r.gwd??r.gwe;
+      const costG=we*r.gwe+wd*gwd;
+      const costM=mwe? we*mwe+wd*mwd : null;
+      return {...r, costG, costM, save: costM!=null? costG-costM : null};
+    });
+  rows.sort((a,b)=>{
+    if(sk==='course') return a.course.localeCompare(b.course);
+    const x=a[sk==='save'?'save':sk], y=b[sk==='save'?'save':sk];
+    if(x==null&&y==null)return 0; if(x==null)return 1; if(y==null)return -1;
+    return y-x;});
+  const withGap=rows.filter(r=>r.save!=null);
+  const med=a=>{const v=a.slice().sort((p,q)=>p-q);return v.length?v[Math.floor(v.length/2)]:null;};
+  const mSave=med(withGap.map(r=>r.save));
+  const mG=med(rows.map(r=>r.costG)), mM=med(withGap.map(r=>r.costM));
+  const top=withGap[0]&&withGap.slice().sort((a,b)=>b.save-a.save)[0];
+  $('#fOut').innerHTML=`
+    <div><span class="v">${mG!=null?Math.round(mG).toLocaleString():'—'} 元</span>
+      <p class="k">無證：一年擊球費<br>中位數，打 ${n} 場</p></div>
+    <div><span class="v">${mM!=null?Math.round(mM).toLocaleString():'—'} 元</span>
+      <p class="k">有證：一年擊球費<br>中位數，同樣 ${n} 場</p></div>
+    <div><span class="v">${mSave!=null?Math.round(mSave).toLocaleString():'—'} 元</span>
+      <p class="k">一年省下<br>中位數</p></div>
+    <div><span class="v">${top?Math.round(top.save).toLocaleString():'—'} 元</span>
+      <p class="k">省最多<br>${top?top.course:'—'}</p></div>
+    <div><span class="v">${withGap.length} / ${rows.length}</span>
+      <p class="k">可比較的球場<br>其餘會員價未取得</p></div>`;
+  $('#fTbl tbody').innerHTML=rows.map(r=>`<tr>
+    <td class="name">${r.course}</td>
+    <td class="opt mute" style="font-size:12px">${r.region}</td>
+    <td class="n">${r.mwd?r.mwd.toLocaleString():'—'}</td>
+    <td class="n"><b>${r.mwe?r.mwe.toLocaleString():'—'}</b></td>
+    <td class="n">${r.gwd?r.gwd.toLocaleString():'—'}</td>
+    <td class="n"><b>${r.gwe.toLocaleString()}</b></td>
+    <td class="n ${r.gap_wd?'up':'mute'}">${r.gap_wd?r.gap_wd.toLocaleString():'—'}</td>
+    <td class="n ${r.gap_we?'up':'mute'}">${r.gap_we?r.gap_we.toLocaleString():'—'}</td>
+    <td class="n ${r.save?'up':'mute'}">${r.save!=null?Math.round(r.save).toLocaleString():'—'}</td>
+    <td class="opt2">${r.flag?'<span class="badge bC">會員價剔除</span>':
+       `<span class="mute" style="font-family:var(--mono);font-size:11px">${r.n} 家</span>`}</td>
+  </tr>`).join('');
+  const zero=withGap.filter(r=>r.gap_we<300);
+  $('#fNote').innerHTML=`<b>怎麼讀這張表。</b>
+    「一年省下」只是擊球費的差額，還沒扣掉買證的資金成本與年費——真正的損益要看「損益兩平」分頁。
+    以打 ${n} 場（假日 ${Math.round(we)} 場）計算，中位數的球場一年可省 ${mSave!=null?Math.round(mSave).toLocaleString():'—'} 元。
+    ${zero.length?`但有 <b>${zero.length} 座球場的假日價差不到 300 元</b>（${zero.slice(0,4).map(r=>r.course).join('、')}${zero.length>4?' 等':''}），
+      買這些球場的證幾乎省不到擊球費，價值必須完全由資本利得或訂位權承擔。`:''}
+    另有 ${rows.length-withGap.length} 座球場的會員價無法從公開收費表可靠取得（多半藏在備註文字中，或抽取結果高於來賓價而被剔除）。`;
+}
+['#fRounds','#fWe','#fReg2','#fSort'].forEach(x=>$(x).oninput=feeCalc);
+
+/* =================== RWD：量測頁首高度供表頭吸附使用 =================== */
+function syncTop(){
+  const h=document.querySelector('.top').getBoundingClientRect().height;
+  document.documentElement.style.setProperty('--topH', Math.round(h)+'px');
+}
+/* 圖表改為依容器寬度作圖，使 SVG 內文字維持真實字級（原本固定 1000 寬，
+   在手機上整張圖被縮到 ~340px，座標軸文字只剩約 4px） */
+function chartW(sel){
+  const el=$(sel); const w=el?el.getBoundingClientRect().width:0;
+  return Math.max(300, Math.round(w||900));
+}
+let rzT;
+addEventListener('resize',()=>{clearTimeout(rzT);rzT=setTimeout(()=>{
+  syncTop(); drawIndex(); if(curCourse) renderCoursePanel();},180);});
+
+/* ---------- init ---------- */
+syncTop(); renderList(); calc(); drawIndex();
+renderCourseGrid(); renderYear(); feeCalc();
+</script>
